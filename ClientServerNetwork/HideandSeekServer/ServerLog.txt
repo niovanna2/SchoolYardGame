@@ -1,0 +1,45 @@
+...Logging started...
+0.0487101: Server Started
+4.0357392: RespondedAwaitingApproval 3540142730229842897 127.0.0.1
+4.0507561: RespondedConnect 3540142730229842897 127.0.0.1
+4.0668662: Connected 3540142730229842897 127.0.0.1
+4.0748149: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: StartVoIP( 1 )
+
+4.0768486: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 0, 0, 0 )
+
+4.0779856: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 0, 1, 0 )
+
+4.0792095: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 0, 2, 0 )
+
+4.0811628: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 1, 0, 0 )
+
+4.0839411: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 1, 1, 0 )
+
+4.0857781: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 1, 2, 0 )
+
+4.0869816: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 2, 0, 0 )
+
+4.0880344: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 2, 1, 0 )
+
+4.0890781: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 2, 2, 0 )
+
+4.1044171: AreaChange 3540142730229842897 127.0.0.1
+4.1335684: Instantiate 3540142730229842897 127.0.0.1
+	NetworkId: 1
+	Prefab: Player
+	Loc: 0, 0, 0
+	Orientation: 0, 0, 0, 1
+4.2586101: LiteSyncUpdate 3540142730229842897 127.0.0.1
+4.999824: SyncUpdate 3540142730229842897 127.0.0.1
+5.1006756: SyncUpdate 3540142730229842897 127.0.0.1
+5.2009849: SyncUpdate 3540142730229842897 127.0.0.1
+5.3014973: SyncUpdate 3540142730229842897 127.0.0.1
+5.4026545: SyncUpdate 3540142730229842897 127.0.0.1
+5.5040436: SyncUpdate 3540142730229842897 127.0.0.1
+5.6048583: SyncUpdate 3540142730229842897 127.0.0.1
+5.6976325: SyncUpdate 3540142730229842897 127.0.0.1
+25.3594732: Destroy 3540142730229842897 127.0.0.1
+25.3763893: Disconnected 3540142730229842897 127.0.0.1
+25.3785541: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: VoiceClientDisconnected(  )
+
+49.3044474: Server shutdown
