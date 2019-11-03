@@ -1,45 +1,83 @@
 ...Logging started...
-0.0487101: Server Started
-4.0357392: RespondedAwaitingApproval 3540142730229842897 127.0.0.1
-4.0507561: RespondedConnect 3540142730229842897 127.0.0.1
-4.0668662: Connected 3540142730229842897 127.0.0.1
-4.0748149: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: StartVoIP( 1 )
+0.0489876: Server Started
+7.3046859: RespondedAwaitingApproval 4818792551411711864 127.0.0.1
+7.3218771: RespondedConnect 4818792551411711864 127.0.0.1
+7.3387469: Connected 4818792551411711864 127.0.0.1
+7.3507162: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: StartVoIP( 1 )
 
-4.0768486: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 0, 0, 0 )
+7.3535831: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 0, 0, 0 )
 
-4.0779856: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 0, 1, 0 )
+7.3560654: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 0, 1, 0 )
 
-4.0792095: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 0, 2, 0 )
+7.3582241: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 0, 2, 0 )
 
-4.0811628: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 1, 0, 0 )
+7.3626725: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 1, 0, 0 )
 
-4.0839411: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 1, 1, 0 )
+7.3644781: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 1, 1, 0 )
 
-4.0857781: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 1, 2, 0 )
+7.3668363: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 1, 2, 0 )
 
-4.0869816: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 2, 0, 0 )
+7.3687382: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 2, 0, 0 )
 
-4.0880344: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 2, 1, 0 )
+7.3704803: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 2, 1, 0 )
 
-4.0890781: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 2, 2, 0 )
+7.3722159: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 2, 2, 0 )
 
-4.1044171: AreaChange 3540142730229842897 127.0.0.1
-4.1335684: Instantiate 3540142730229842897 127.0.0.1
+7.3930936: AreaChange 4818792551411711864 127.0.0.1
+7.4388967: Instantiate 4818792551411711864 127.0.0.1
 	NetworkId: 1
 	Prefab: Player
 	Loc: 0, 0, 0
 	Orientation: 0, 0, 0, 1
-4.2586101: LiteSyncUpdate 3540142730229842897 127.0.0.1
-4.999824: SyncUpdate 3540142730229842897 127.0.0.1
-5.1006756: SyncUpdate 3540142730229842897 127.0.0.1
-5.2009849: SyncUpdate 3540142730229842897 127.0.0.1
-5.3014973: SyncUpdate 3540142730229842897 127.0.0.1
-5.4026545: SyncUpdate 3540142730229842897 127.0.0.1
-5.5040436: SyncUpdate 3540142730229842897 127.0.0.1
-5.6048583: SyncUpdate 3540142730229842897 127.0.0.1
-5.6976325: SyncUpdate 3540142730229842897 127.0.0.1
-25.3594732: Destroy 3540142730229842897 127.0.0.1
-25.3763893: Disconnected 3540142730229842897 127.0.0.1
-25.3785541: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: VoiceClientDisconnected(  )
+7.5552603: LiteSyncUpdate 4818792551411711864 127.0.0.1
+8.3728471: SyncUpdate 4818792551411711864 127.0.0.1
+8.4827444: SyncUpdate 4818792551411711864 127.0.0.1
+8.5860877: SyncUpdate 4818792551411711864 127.0.0.1
+8.6887651: SyncUpdate 4818792551411711864 127.0.0.1
+8.7845019: SyncUpdate 4818792551411711864 127.0.0.1
+8.8897834: SyncUpdate 4818792551411711864 127.0.0.1
+8.9892897: SyncUpdate 4818792551411711864 127.0.0.1
+9.0996154: SyncUpdate 4818792551411711864 127.0.0.1
+9.2018536: SyncUpdate 4818792551411711864 127.0.0.1
+11.7678121: RespondedAwaitingApproval -3850306440346546744 127.0.0.1
+11.7846141: RespondedConnect -3850306440346546744 127.0.0.1
+11.8159024: Connected -3850306440346546744 127.0.0.1
+11.8362139: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: StartVoIP( 2 )
 
-49.3044474: Server shutdown
+11.8470045: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 0, 0, 0 )
+
+11.8507394: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 0, 1, 0 )
+
+11.8536178: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 0, 2, 0 )
+
+11.8803191: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 1, 0, 0 )
+
+11.8883121: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 1, 1, 0 )
+
+11.9059667: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 1, 2, 0 )
+
+11.9109757: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 2, 0, 0 )
+
+11.9203408: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 2, 1, 0 )
+
+11.929836: => Outgoing RPC Sent to: SingleClient as SingleClient NetSyncId: -1 Function: UpdateGameState( 2, 2, 0 )
+
+11.942386: AreaChange -3850306440346546744 127.0.0.1
+12.0091936: Instantiate -3850306440346546744 127.0.0.1
+	NetworkId: 502
+	Prefab: Player
+	Loc: 0, 0, 0
+	Orientation: 0, 0, 0, 1
+12.1393665: LiteSyncUpdate -3850306440346546744 127.0.0.1
+14.1862954: SyncUpdate 4818792551411711864 127.0.0.1
+14.2830634: SyncUpdate 4818792551411711864 127.0.0.1
+14.3845165: SyncUpdate 4818792551411711864 127.0.0.1
+14.4890734: SyncUpdate 4818792551411711864 127.0.0.1
+14.5986688: SyncUpdate 4818792551411711864 127.0.0.1
+14.6984499: SyncUpdate 4818792551411711864 127.0.0.1
+14.8017158: SyncUpdate 4818792551411711864 127.0.0.1
+14.9023998: SyncUpdate 4818792551411711864 127.0.0.1
+15.0042327: SyncUpdate 4818792551411711864 127.0.0.1
+15.111578: SyncUpdate 4818792551411711864 127.0.0.1
+15.2097899: SyncUpdate 4818792551411711864 127.0.0.1
+21.7827441: Server shutdown

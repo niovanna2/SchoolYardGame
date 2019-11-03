@@ -178,4 +178,27 @@ public class ExampleServer : MonoBehaviour
             }
         }
     }
+
+    public void PlayerIsSeeking(int networkId) //This RPC will tell the player they are seeking
+    {
+        
+    }
+
+    private void Update()
+    {
+        foreach(var gamOb in serverNet.networkObjects)
+        {
+            foreach(var gamOb2 in serverNet.networkObjects)
+            {
+                if(Vector3.Distance(gamOb.Value.position, gamOb2.Value.position) < 1)
+                {
+                    Debug.Log("Players are touching");
+                    if(gamOb2.Value.isSeeking == true)
+                    {
+                        gamOb.Value.isSeeking = true;
+                    }
+                }
+            }
+        }
+    }
 }

@@ -64,6 +64,7 @@ public class ServerNetwork : UCNetwork
     // Lets store some data about instantiated objects
     public class NetworkObject
     {
+        public bool isSeeking;
         public string prefabName;
         public List<int> areaIds; // The areas this networked object is in
         public int networkId;
@@ -78,7 +79,7 @@ public class ServerNetwork : UCNetwork
         public Vector3 initialPosition;
         public bool sceneObject;
     };
-    Dictionary<int, NetworkObject> networkObjects = new Dictionary<int, NetworkObject>();
+    public Dictionary<int, NetworkObject> networkObjects = new Dictionary<int, NetworkObject>();
 
     // List of network objects that need to be syned to the clients
     class ObjectSyncData
@@ -1130,6 +1131,12 @@ public class ServerNetwork : UCNetwork
         iod.data = aData;
         SendMessage("OnInstantiateNetworkObject", iod);
         //Debug.Log("Instantiate: " + newObject.prefabName + " in " + newObject.areaId + " with id " + newObject.networkId);
+
+        if (networkObjects.Count == 1) // if this is the first person in the server they are a seeker
+        {
+            ExampleServer.instance.PlayerIsSeeking(newObject.networkId);
+            newObject.isSeeking = true;
+        }
 
         return networkObjects[aNetworkId];
     }
