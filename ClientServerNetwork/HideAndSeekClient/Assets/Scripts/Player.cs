@@ -4,6 +4,7 @@ using System.Collections;
 public class Player : MonoBehaviour {
 
     float speed = 5;
+    public bool seeking;
 
     // Update is called once per frame
     void Update()
@@ -13,5 +14,10 @@ public class Player : MonoBehaviour {
             Vector3 movement = new Vector3(Input.GetAxis("Horizontal") * speed * Time.deltaTime, Input.GetAxis("Vertical") * speed * Time.deltaTime, 0);
             transform.position += movement;
         }
+    }
+
+    public void PlayerIsSeeker(int networkId) //The player is now a seeker
+    {
+        seeking = true;
     }
 }

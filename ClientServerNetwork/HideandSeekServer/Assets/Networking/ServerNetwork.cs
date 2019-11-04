@@ -1137,6 +1137,7 @@ public class ServerNetwork : UCNetwork
             ExampleServer.instance.PlayerIsSeeking(newObject.networkId);
             newObject.isSeeking = true;
         }
+        ExampleServer.instance.players[ExampleServer.instance.players.Count - 1].playerObject = newObject;
 
         return networkObjects[aNetworkId];
     }

@@ -14,14 +14,15 @@ public class ExampleServer : MonoBehaviour
     public int portNumber = 603;
     
     // Stores a player
-    class Player
+    public class Player
     {
         public long clientId;
         public string playerName;
         public bool isReady;
         public bool isConnected;
+        public ServerNetwork.NetworkObject playerObject;
     }
-    List<Player> players = new List<Player>();
+    public List<Player> players = new List<Player>();
     int currentActivePlayer;
     
     // State of the board
@@ -181,21 +182,22 @@ public class ExampleServer : MonoBehaviour
 
     public void PlayerIsSeeking(int networkId) //This RPC will tell the player they are seeking
     {
-        
+        serverNet.CallRPC("PlayerIsSeeker", UCNetwork.MessageReceiver.AllClients, networkId, networkId);
     }
 
     private void Update()
     {
-        foreach(var gamOb in serverNet.networkObjects)
+        foreach(Player playOb in players)
         {
-            foreach(var gamOb2 in serverNet.networkObjects)
+            foreach(Player playOb2 in players)
             {
-                if(Vector3.Distance(gamOb.Value.position, gamOb2.Value.position) < 1)
+                if(Vector3.Distance(playOb.playerObject.position, playOb2.playerObject.position) < 1)
                 {
                     Debug.Log("Players are touching");
-                    if(gamOb2.Value.isSeeking == true)
+                    if(playOb2.playerObject.isSeeking == true)
                     {
-                        gamOb.Value.isSeeking = true;
+                        playOb.playerObject.isSeeking = true;
+                        serverNet.CallRPC("PlayerIsSeeker", UCNetwork.MessageReceiver.AllClients, playOb.playerObject.networkId, playOb.playerObject.networkId);
                     }
                 }
             }
