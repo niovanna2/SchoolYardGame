@@ -87,7 +87,7 @@ public class ExampleServer : MonoBehaviour
             {
                 p.isConnected = true;
             }
-            if(p.playerObject.isSeeking)
+            if (p.playerObject.isSeeking)
             {
                 serverNet.CallRPC("PlayerIsSeeker", aClientId, p.playerObject.networkId, p.playerObject.networkId);
             }
@@ -167,17 +167,20 @@ public class ExampleServer : MonoBehaviour
         }
         else if (gameState == GameState.running)
         {
-            foreach (Player playOb in players)
+            if (players.Count > 1)
             {
-                foreach (Player playOb2 in players)
+                foreach (Player playOb in players)
                 {
-                    if (Vector3.Distance(playOb.playerObject.position, playOb2.playerObject.position) < 1)
+                    foreach (Player playOb2 in players)
                     {
-                        Debug.Log("Players are touching");
-                        if (playOb2.playerObject.isSeeking == true)
+                        if (Vector3.Distance(playOb.playerObject.position, playOb2.playerObject.position) < 1 && playOb != playOb2)
                         {
-                            playOb.playerObject.isSeeking = true;
-                            serverNet.CallRPC("PlayerIsSeeker", UCNetwork.MessageReceiver.AllClients, playOb.playerObject.networkId, playOb.playerObject.networkId);
+                            Debug.Log("Players are touching");
+                            if (playOb2.playerObject.isSeeking == true)
+                            {
+                                playOb.playerObject.isSeeking = true;
+                                serverNet.CallRPC("PlayerIsSeeker", UCNetwork.MessageReceiver.AllClients, playOb.playerObject.networkId, playOb.playerObject.networkId);
+                            }
                         }
                     }
                 }
