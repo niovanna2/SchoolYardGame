@@ -187,20 +187,24 @@ public class ExampleServer : MonoBehaviour
 
     private void Update()
     {
-        foreach(Player playOb in players)
+        if(players.Count > 1)
         {
-            foreach(Player playOb2 in players)
+            foreach (Player playOb in players)
             {
-                if(Vector3.Distance(playOb.playerObject.position, playOb2.playerObject.position) < 1)
+                foreach (Player playOb2 in players)
                 {
-                    Debug.Log("Players are touching");
-                    if(playOb2.playerObject.isSeeking == true)
+                    if (Vector3.Distance(playOb.playerObject.position, playOb2.playerObject.position) < 1)
                     {
-                        playOb.playerObject.isSeeking = true;
-                        serverNet.CallRPC("PlayerIsSeeker", UCNetwork.MessageReceiver.AllClients, playOb.playerObject.networkId, playOb.playerObject.networkId);
+                        Debug.Log("Players are touching");
+                        if (playOb2.playerObject.isSeeking == true)
+                        {
+                            playOb.playerObject.isSeeking = true;
+                            serverNet.CallRPC("PlayerIsSeeker", UCNetwork.MessageReceiver.AllClients, playOb.playerObject.networkId, playOb.playerObject.networkId);
+                        }
                     }
                 }
             }
         }
+        
     }
 }
