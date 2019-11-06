@@ -12,7 +12,7 @@ public class ExampleServer : MonoBehaviour
     public ServerNetwork serverNet;
 
     public int portNumber = 603;
-    
+
     // Stores a player
     public class Player
     {
@@ -24,15 +24,14 @@ public class ExampleServer : MonoBehaviour
     }
     public List<Player> players = new List<Player>();
     int currentActivePlayer;
-    
-    // State of the board
-    enum BoardState
+
+    public enum GameState
     {
-        Empty,
-        X,
-        O
+        pregame,
+        running,
+        endgame
     }
-    BoardState[,] board = new BoardState[3,3];
+    public GameState gameState = GameState.pregame;
 
     // Use this for initialization
     void Awake()
@@ -60,7 +59,7 @@ public class ExampleServer : MonoBehaviour
         Debug.Log("Connection request from " + data.username);
 
         // We either need to approve a connection or deny it
-        if (players.Count < 2) //Make this bigger for the final game
+        if (gameState == GameState.pregame) //Make this bigger for the final game
         {
             Player newPlayer = new Player();
             newPlayer.clientId = data.id;
@@ -88,14 +87,13 @@ public class ExampleServer : MonoBehaviour
             {
                 p.isConnected = true;
             }
-        }
-
-        // Send the client the current state of the board
-        for (int i=0; i<board.GetLongLength(0); i++)
-        {
-            for (int j=0; j<board.GetLongLength(1); j++)
+            if (p.playerObject.isSeeking)
             {
-                serverNet.CallRPC("UpdateGameState", aClientId, -1, i, j, (int)board[i, j]);
+                serverNet.CallRPC("PlayerIsSeeker", aClientId, p.playerObject.networkId, p.playerObject.networkId);
+            }
+            else
+            {
+                serverNet.CallRPC("PlayerIsNotSeeker", aClientId, p.playerObject.networkId, p.playerObject.networkId);
             }
         }
 
@@ -143,30 +141,6 @@ public class ExampleServer : MonoBehaviour
         */
     }
 
-    // Request from the client to take a turn
-    public void TakeTurn(int xPos, int yPos)
-    {
-        // Is it your turn?
-        // Is that spot open?
-        if (players[0].clientId == serverNet.SendingClientId)
-        {
-            board[xPos, yPos] = BoardState.X;
-        }
-        else
-        {
-            board[xPos, yPos] = BoardState.O;
-        }
-
-        // Check if you've won
-
-        // Tell the clients that the game has been updated
-        serverNet.CallRPC("UpdateGameState", UCNetwork.MessageReceiver.AllClients, -1, xPos, yPos, (int)board[xPos, yPos]);
-
-        // Tell the clients whose turn it is
-        currentActivePlayer = currentActivePlayer == 1 ? 0 : 1;
-        serverNet.CallRPC("StartTurn", players[currentActivePlayer].clientId, -1);
-    }
-
     void OnClientDisconnected(long aClientId)
     {
         // Set the isConnected to true on the player
@@ -174,8 +148,8 @@ public class ExampleServer : MonoBehaviour
         {
             if (p.clientId == aClientId)
             {
-                p.isConnected = false;
-                p.isReady = false;
+                players.Remove(p);
+                return;
             }
         }
     }
@@ -187,24 +161,51 @@ public class ExampleServer : MonoBehaviour
 
     private void Update()
     {
-        if(players.Count > 1)
+        if (gameState == GameState.pregame)
         {
-            foreach (Player playOb in players)
+
+        }
+        else if (gameState == GameState.running)
+        {
+            if (players.Count > 1)
             {
-                foreach (Player playOb2 in players)
+                foreach (Player playOb in players)
                 {
-                    if (Vector3.Distance(playOb.playerObject.position, playOb2.playerObject.position) < 1)
+                    foreach (Player playOb2 in players)
                     {
-                        Debug.Log("Players are touching");
-                        if (playOb2.playerObject.isSeeking == true)
+                        if (Vector3.Distance(playOb.playerObject.position, playOb2.playerObject.position) < 1 && playOb != playOb2)
                         {
-                            playOb.playerObject.isSeeking = true;
-                            serverNet.CallRPC("PlayerIsSeeker", UCNetwork.MessageReceiver.AllClients, playOb.playerObject.networkId, playOb.playerObject.networkId);
+                            Debug.Log("Players are touching");
+                            if (playOb2.playerObject.isSeeking == true)
+                            {
+                                playOb.playerObject.isSeeking = true;
+                                serverNet.CallRPC("PlayerIsSeeker", UCNetwork.MessageReceiver.AllClients, playOb.playerObject.networkId, playOb.playerObject.networkId);
+                            }
                         }
                     }
                 }
             }
         }
-        
+        else if (gameState == GameState.endgame)
+        {
+
+        }
+    }
+
+    public void EveryoneIsReady()
+    {
+        serverNet.CallRPC("Run", UCNetwork.MessageReceiver.AllClients, -1);
+        players.TrimExcess();
+        for (int i = 0; i < players.Count; i++)
+        {
+            if (i % 5 == 0)
+            {
+                serverNet.CallRPC("PlayerIsSeeker", UCNetwork.MessageReceiver.AllClients, players[i].playerObject.networkId, players[i].playerObject.networkId);
+            }
+            else
+            {
+                serverNet.CallRPC("PlayerIsNotSeeker", UCNetwork.MessageReceiver.AllClients, players[i].playerObject.networkId, players[i].playerObject.networkId);
+            }
+        }
     }
 }
