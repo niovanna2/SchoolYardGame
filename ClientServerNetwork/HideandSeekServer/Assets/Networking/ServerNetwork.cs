@@ -1138,6 +1138,13 @@ public class ServerNetwork : UCNetwork
             newObject.isSeeking = true;
         }
         ExampleServer.instance.players[ExampleServer.instance.players.Count - 1].playerObject = newObject;
+        foreach(ExampleServer.Player player in ExampleServer.instance.players)
+        {
+            if(player.playerObject.isSeeking == true)
+            {
+                ExampleServer.instance.PlayerIsSeeking(player.playerObject.networkId);
+            }
+        }
 
         return networkObjects[aNetworkId];
     }

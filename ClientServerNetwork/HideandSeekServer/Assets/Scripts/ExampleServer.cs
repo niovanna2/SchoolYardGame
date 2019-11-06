@@ -173,7 +173,7 @@ public class ExampleServer : MonoBehaviour
                 {
                     foreach (Player playOb2 in players)
                     {
-                        if (Vector3.Distance(playOb.playerObject.position, playOb2.playerObject.position) < 1 && playOb != playOb2)
+                        if (Vector3.Distance(playOb.playerObject.position, playOb2.playerObject.position) < .5f && playOb != playOb2)
                         {
                             Debug.Log("Players are touching");
                             if (playOb2.playerObject.isSeeking == true)
@@ -205,6 +205,24 @@ public class ExampleServer : MonoBehaviour
             else
             {
                 serverNet.CallRPC("PlayerIsNotSeeker", UCNetwork.MessageReceiver.AllClients, players[i].playerObject.networkId, players[i].playerObject.networkId);
+            }
+        }
+    }
+
+    public void Slap() //look a few spaces in front of the player and see if anyone is there
+    {
+        foreach (Player player1 in players)
+        {
+            if(player1.clientId == serverNet.SendingClientId)
+            {
+                foreach(Player player2 in players)
+                {
+                    if(Vector3.Distance(player1.playerObject.rotation * Vector3.forward, player2.playerObject.position) < 1.5f && player2 != player1)
+                    {
+                        Debug.Log("Slapped");
+                        serverNet.CallRPC("PlayerIsSeeker", UCNetwork.MessageReceiver.AllClients, player2.playerObject.networkId, player2.playerObject.networkId);
+                    }
+                }
             }
         }
     }
