@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GenerateTree : MonoBehaviour
 {
-    public List<GameObject> flowers;
     public TerrianGenerator tg;
     TerrainData terrainData;
     List<GameObject> mapObjects;
@@ -64,6 +63,7 @@ public class GenerateTree : MonoBehaviour
             }
         }
 
+        tg.UpdateMemoryStream();
         StartCoroutine(ClearMap());
     }
 

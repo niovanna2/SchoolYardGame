@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using System.Text;
 
 public class TerrianGenerator : MonoBehaviour
 {
@@ -16,12 +18,27 @@ public class TerrianGenerator : MonoBehaviour
 
     public Terrain terrain;
 
+    public MemoryStream memoryStream;
+
     void Start()
     {
         offsetX = Random.Range(0f, 99999f);
         offsetY = Random.Range(0f, 99999f);
         terrain = GetComponent<Terrain>();
         terrain.terrainData = GenerateTerrain(terrain.terrainData);
+    }
+
+    public void UpdateMemoryStream()
+    {
+        byte[] buffer = new byte[1024];
+        memoryStream = new MemoryStream(buffer);
+
+        BinaryWriter bw = new BinaryWriter(memoryStream);
+
+        bw.Write(terrain);
+
+        string s = Encoding.UTF8.GetString(buffer);
+        //RPC send out terrain
     }
 
     TerrainData GenerateTerrain(TerrainData terrainData)
