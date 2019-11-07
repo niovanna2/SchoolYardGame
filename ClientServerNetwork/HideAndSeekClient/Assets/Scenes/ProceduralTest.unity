@@ -197,7 +197,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 126130220}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 106.9, y: 226.5, z: 131.5}
+  m_LocalPosition: {x: 36.93, y: 100, z: 60.61}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -290,7 +290,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 132066866}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.442741, y: 18.29, z: 114.94182}
+  m_LocalPosition: {x: 0, y: 10, z: 1.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -511,9 +511,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc0c966c60fbfc46ad12fbb1ba3bcab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  depth: 10
-  width: 256
-  height: 256
+  depth: 5
+  width: 100
+  height: 100
   scale: 10
   offsetX: 100
   offsetY: 100
@@ -602,17 +602,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91c60bf7ed4f52c4380bbfdd510afbd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flowers:
-  - {fileID: 100578, guid: bd4eef721cfd2af46a5d7c6262bfc4a4, type: 3}
-  - {fileID: 123206, guid: 0339e1760e0fc154d8cd16974c8c82f7, type: 3}
-  - {fileID: 122336, guid: 39825d3284a7cd9439cb7b3aac51c93b, type: 3}
-  - {fileID: 180470, guid: f3cbaf532987e2c48bb8363eceb7174a, type: 3}
-  - {fileID: 193936, guid: 0656e17b03025f246a8137035be37b47, type: 3}
-  - {fileID: 144872, guid: 98aae12bc92ecf6418f769471d279444, type: 3}
-  - {fileID: 133206, guid: ca90765c45209df47b2e0751e54ecff1, type: 3}
-  - {fileID: 186884, guid: 1c209a4baa63d2240a1effb02c374f74, type: 3}
-  - {fileID: 177012, guid: e9fe94f5d1ed2df42bedd2c7e6227c30, type: 3}
-  - {fileID: 155744, guid: 3a2ac2d2eee743c4b85019e0db397bbc, type: 3}
-  - {fileID: 141278, guid: d26414d3d0f94114b94f9167c7104b81, type: 3}
-  - {fileID: 143700, guid: 862af2bbfa94aab40965f0da1ab88e04, type: 3}
   tg: {fileID: 1932472952}
