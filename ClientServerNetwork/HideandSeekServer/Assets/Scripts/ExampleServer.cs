@@ -70,12 +70,10 @@ public class ExampleServer : MonoBehaviour
 
             serverNet.ConnectionApproved(data.id);
         }
-        /*
         else
         {
             serverNet.ConnectionDenied(data.id);
-        }
-        */
+        }        
     }
 
     void OnClientConnected(long aClientId)
@@ -118,22 +116,6 @@ public class ExampleServer : MonoBehaviour
             }
         }
 
-        // Are all of the players ready?
-        bool allPlayersReady = true;
-        foreach (Player p in players)
-        {
-            if (!p.isReady)
-            {
-                allPlayersReady = false;
-            }
-        }
-        if (allPlayersReady)
-        {
-            // Tell the first player it's their turn
-            currentActivePlayer = 0;
-            serverNet.CallRPC("StartTurn", players[0].clientId, -1);
-        }
-
         /*
         ServerNetwork.ClientData data = serverNet.GetClientData(serverNet.SendingClientId);
         serverNet.CallRPC("Whatever", UCNetwork.MessageReceiver.AllClients, -1);
@@ -163,27 +145,54 @@ public class ExampleServer : MonoBehaviour
     {
         if (gameState == GameState.pregame)
         {
-
+            // Are all of the players ready?
+            bool allPlayersReady = true;
+            if (players.Count > 1)
+            {
+                foreach (Player p in players)
+                {
+                    if (!p.isReady)
+                    {
+                        allPlayersReady = false;
+                    }
+                }
+                if (allPlayersReady)
+                {
+                    gameState = GameState.running;
+                    EveryoneIsReady();
+                }
+            }
         }
         else if (gameState == GameState.running)
         {
-            if (players.Count > 1)
+            foreach (Player playOb in players)
             {
-                foreach (Player playOb in players)
+                foreach (Player playOb2 in players)
                 {
-                    foreach (Player playOb2 in players)
+                    if (Vector3.Distance(playOb.playerObject.position, playOb2.playerObject.position) < .5f && playOb != playOb2)
                     {
-                        if (Vector3.Distance(playOb.playerObject.position, playOb2.playerObject.position) < .5f && playOb != playOb2)
+                        Debug.Log("Players are touching");
+                        if (playOb2.playerObject.isSeeking == true)
                         {
-                            Debug.Log("Players are touching");
-                            if (playOb2.playerObject.isSeeking == true)
-                            {
-                                playOb.playerObject.isSeeking = true;
-                                serverNet.CallRPC("PlayerIsSeeker", UCNetwork.MessageReceiver.AllClients, playOb.playerObject.networkId, playOb.playerObject.networkId);
-                            }
+                            playOb.playerObject.isSeeking = true;
+                            serverNet.CallRPC("PlayerIsSeeker", UCNetwork.MessageReceiver.AllClients, playOb.playerObject.networkId, playOb.playerObject.networkId);
                         }
                     }
                 }
+            }
+
+            int hiders = players.Count;
+            foreach (Player p in players)
+            {
+                if (p.playerObject.isSeeking)
+                {
+                    hiders--;
+                }
+            }
+            if (hiders <= 0)
+            {
+                gameState = GameState.endgame;
+                serverNet.CallRPC("EndGame", UCNetwork.MessageReceiver.AllClients, -1);
             }
         }
         else if (gameState == GameState.endgame)
@@ -213,11 +222,11 @@ public class ExampleServer : MonoBehaviour
     {
         foreach (Player player1 in players)
         {
-            if(player1.clientId == serverNet.SendingClientId)
+            if (player1.clientId == serverNet.SendingClientId)
             {
-                foreach(Player player2 in players)
+                foreach (Player player2 in players)
                 {
-                    if(Vector3.Distance(player1.playerObject.rotation * Vector3.forward, player2.playerObject.position) < 1.5f && player2 != player1)
+                    if (Vector3.Distance(player1.playerObject.rotation * Vector3.forward, player2.playerObject.position) < 1.5f && player2 != player1)
                     {
                         Debug.Log("Slapped");
                         serverNet.CallRPC("PlayerIsSeeker", UCNetwork.MessageReceiver.AllClients, player2.playerObject.networkId, player2.playerObject.networkId);

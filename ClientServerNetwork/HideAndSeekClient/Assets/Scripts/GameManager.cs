@@ -28,27 +28,10 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if(gameState == GameState.pregame)
-        {
-            GetPlayers();
-            if(CheckFlags())
-            {
-                Run();
-            }
+        {            
         }
         if(gameState == GameState.running)
-        {
-            int hiders = players.Length;
-            foreach(GameObject p in players)
-            {
-                if(p.GetComponent<Player>().seeking)
-                {
-                    hiders--;
-                }
-            }
-            if(hiders <= 0)
-            {
-                EndGame();
-            }
+        {            
         }        
         if(gameState == GameState.endgame)
         {
@@ -70,27 +53,5 @@ public class GameManager : MonoBehaviour
     private void EndGame()
     {
         gameState = GameState.endgame;
-    }
-
-    private bool CheckFlags()
-    {
-        int yesses = 0;
-        foreach(GameObject p in players)
-        {
-            if(p.GetComponent<Player>().ready)
-            {
-                yesses++;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        if (yesses > 0)
-        {
-            return true;
-        }
-        else
-            return false;
     }
 }

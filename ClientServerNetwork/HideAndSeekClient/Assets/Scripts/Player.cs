@@ -7,11 +7,13 @@ public class Player : MonoBehaviour {
     public bool seeking;
     public bool ready = false;
     ExampleClient clientEx;
+    ClientNetwork clientNet;
     Rigidbody rb;
 
     private void Start()
     {
         clientEx = FindObjectOfType<ExampleClient>();
+        clientNet = FindObjectOfType<ClientNetwork>();
         rb = GetComponent<Rigidbody>();
     }
 
@@ -65,11 +67,11 @@ public class Player : MonoBehaviour {
         seeking = false;
     }
 
-    private void OnCollisionStay(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if(collision.collider.tag == "ResourceNode")
         {
-            ready = true;
+            clientNet.CallRPC("PlayerIsReady", UCNetwork.MessageReceiver.ServerOnly, -1);
         }
     }
     private void OnCollisionExit(Collision collision)
