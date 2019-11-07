@@ -3,52 +3,61 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
-    float speed = 5;
+    [SerializeField] float speed = 500.0f;
     public bool seeking;
     public bool ready = false;
     ExampleClient clientEx;
+    Rigidbody rb;
 
     private void Start()
     {
         clientEx = FindObjectOfType<ExampleClient>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
-    {
+    {        
+        float dt = Time.deltaTime;
         if (GetComponent<NetworkSync>().owned)
         {
-            //Vector3 movement = new Vector3(Input.GetAxis("Horizontal") * speed * Time.deltaTime, 0, Input.GetAxis("Vertical") * speed * Time.deltaTime);
-            if(Input.GetKey(KeyCode.W))
+            //camera stuff
+            if (CameraScript.instance.transform.parent != transform)
             {
-                Vector3 movement = (transform.rotation * Vector3.forward) * speed * Time.deltaTime;
-                transform.position += movement;
+                CameraScript.instance.transform.SetParent(transform);
+                CameraScript.instance.transform.SetPositionAndRotation(transform.position, transform.rotation);
             }
-            if(Input.GetKey(KeyCode.S))
-            {
-                Vector3 movement = (transform.rotation * Vector3.back) * speed * Time.deltaTime;
-                transform.position += movement;
-            }
-            if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
-            {
-                transform.Rotate(0, Input.GetAxis("Horizontal") * 2, 0);
-            }
-            if(Input.GetKeyDown(KeyCode.Space) && seeking == true)
+
+            //movement
+            Vector3 addForce = new Vector3(
+                Input.GetAxis("Horizontal"),
+                0,
+                Input.GetAxis("Vertical"));
+            if (addForce.magnitude > 1.0f)
+                addForce.Normalize();
+            rb.AddRelativeForce(addForce * speed * dt);
+
+            //looking left/right
+            transform.eulerAngles += new Vector3(0, Input.GetAxis("Mouse X"), 0);
+
+            //slappage
+            if(Input.GetButtonDown("Slap") && seeking == true)
             {
                 clientEx.clientNet.CallRPC("Slap", UCNetwork.MessageReceiver.ServerOnly, -1);
             }
             Debug.DrawRay(transform.position, transform.rotation * Vector3.forward * 2);
-
-            CameraScript.instance.transform.SetPositionAndRotation(
-                transform.position,
-                transform.rotation);
         }
+    }
+
+    private void FixedUpdate()
+    {
+        rb.velocity *= 1.0f - Time.fixedDeltaTime;
     }
 
     public void PlayerIsSeeker(int networkId) //The player is now a seeker
     {
         seeking = true;
-        speed = 7;
+        speed = 75;
     }
 
     public void PlayerIsNotSeeker(int networkId) //The player is now a seeker

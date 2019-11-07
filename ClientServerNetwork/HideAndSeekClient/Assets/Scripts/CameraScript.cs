@@ -22,5 +22,7 @@ public class CameraScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float dt = Time.deltaTime;
+        transform.eulerAngles += new Vector3(-Input.GetAxis("Mouse Y"), 0, 0);
     }
 }
