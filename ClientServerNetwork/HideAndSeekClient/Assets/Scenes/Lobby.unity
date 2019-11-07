@@ -383,6 +383,7 @@ GameObject:
   - component: {fileID: 393346512}
   - component: {fileID: 393346511}
   - component: {fileID: 393346516}
+  - component: {fileID: 393346517}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -481,6 +482,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 21c074ef8a0db6145b4fc83e259eb806, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &393346517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 393346510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81bdde5f35e1fd549a9b0b3b402d31f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &575254260
@@ -1361,6 +1374,8 @@ GameObject:
   - component: {fileID: 1385401857}
   - component: {fileID: 1385401858}
   - component: {fileID: 1385401859}
+  - component: {fileID: 1385401860}
+  - component: {fileID: 1385401861}
   m_Layer: 0
   m_Name: ExampleClient
   m_TagString: Untagged
@@ -1412,6 +1427,34 @@ MonoBehaviour:
   isServer: 0
   remoteVoiceChatContainerObject: {fileID: 0}
   remoteVoiceChatPrefab: {fileID: 0}
+--- !u!114 &1385401860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385401856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81bdde5f35e1fd549a9b0b3b402d31f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1385401861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385401856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3275c1156282c04989dcdf98c84e5c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pregame: Lobby
+  running: MainGame
+  endgame: 
+  gameState: 0
 --- !u!1 &1443252314
 GameObject:
   m_ObjectHideFlags: 0
@@ -1565,6 +1608,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1490385321}
   - component: {fileID: 1490385320}
+  - component: {fileID: 1490385322}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -1646,6 +1690,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1490385322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490385319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81bdde5f35e1fd549a9b0b3b402d31f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1546661757
 GameObject:
   m_ObjectHideFlags: 0
@@ -1659,7 +1715,7 @@ GameObject:
   - component: {fileID: 1546661759}
   - component: {fileID: 1546661758}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: ReadyPad
   m_TagString: ResourceNode
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

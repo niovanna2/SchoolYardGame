@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] string pregame;
+    [SerializeField] string running;
+    [SerializeField] string endgame;
     public enum GameState
     {
         pregame,
@@ -48,10 +52,12 @@ public class GameManager : MonoBehaviour
     {
         gameState = GameState.running;
         players = GetPlayers();
+        SceneManager.LoadScene(running);
     }
 
     private void EndGame()
     {
         gameState = GameState.endgame;
+        SceneManager.LoadScene(pregame);
     }
 }

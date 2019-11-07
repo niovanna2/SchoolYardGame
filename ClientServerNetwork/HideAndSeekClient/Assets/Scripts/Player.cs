@@ -3,7 +3,10 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
-    [SerializeField] float speed = 500.0f;
+    [SerializeField] float defaultSpeed = 500.0f;
+    [SerializeField] float seekerSpeed = 750.0f;
+    float speed = 500.0f;
+    [SerializeField] float dragScalar = 1.0f;
     public bool seeking;
     public bool ready = false;
     ExampleClient clientEx;
@@ -53,18 +56,19 @@ public class Player : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        rb.velocity *= 1.0f - Time.fixedDeltaTime;
+        rb.velocity *= 1.0f - (Time.fixedDeltaTime * dragScalar);
     }
 
     public void PlayerIsSeeker(int networkId) //The player is now a seeker
     {
         seeking = true;
-        speed = 75;
+        speed = seekerSpeed;
     }
 
     public void PlayerIsNotSeeker(int networkId) //The player is now a seeker
     {
         seeking = false;
+        speed = defaultSpeed;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -72,13 +76,6 @@ public class Player : MonoBehaviour {
         if(collision.collider.tag == "ResourceNode")
         {
             clientNet.CallRPC("PlayerIsReady", UCNetwork.MessageReceiver.ServerOnly, -1);
-        }
-    }
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.collider.tag == "ResourceNode")
-        {
-            ready = false;
         }
     }
 }
