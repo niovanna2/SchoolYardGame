@@ -7,8 +7,12 @@ public class GenerateTree : MonoBehaviour
     public TerrianGenerator tg;
     TerrainData terrainData;
     List<GameObject> mapObjects;
+    public List<GameObject> spawnPoints;
+    public GameObject spawnPointPref;
+
     private void Start()
     {
+        int i = 0;
         mapObjects = new List<GameObject>();
         terrainData = tg.terrain.terrainData;
         for (float x = 0; x < terrainData.heightmapWidth; x++)
@@ -60,8 +64,20 @@ public class GenerateTree : MonoBehaviour
                     terrain.AddTreeInstance(treeTemp);
                     terrain.Flush();
                 }
+
+                int r3 = Random.Range(0, 400);
+                if (r3 == 0 && i < 16)
+                {
+                    GameObject sp = Instantiate(spawnPointPref);
+                    sp.transform.position = new Vector3(terrainData.heightmapWidth-x, 0, terrainData.heightmapHeight-z);
+                    spawnPoints.Add(sp);
+                    i++;
+                }
+
+
             }
         }
+
 
         tg.UpdateMemoryStream();
         StartCoroutine(ClearMap());
