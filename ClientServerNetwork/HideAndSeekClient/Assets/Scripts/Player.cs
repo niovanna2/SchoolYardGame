@@ -50,7 +50,11 @@ public class Player : MonoBehaviour {
             {
                 clientEx.clientNet.CallRPC("Slap", UCNetwork.MessageReceiver.ServerOnly, -1);
             }
-            Debug.DrawRay(transform.position, transform.rotation * Vector3.forward * 2);
+            //Jumping
+            if(Input.GetButtonDown("Jump"))
+            {
+                rb.AddRelativeForce(new Vector3(0, 7, 0), ForceMode.Impulse);
+            }
         }
     }
 
@@ -63,12 +67,14 @@ public class Player : MonoBehaviour {
     {
         seeking = true;
         speed = seekerSpeed;
+        GetComponent<Renderer>().material.color = new Color(1, 0, 0);
     }
 
     public void PlayerIsNotSeeker(int networkId) //The player is now a seeker
     {
         seeking = false;
         speed = defaultSpeed;
+        GetComponent<Renderer>().material.color = new Color(0, 1, 0);
     }
 
     private void OnCollisionEnter(Collision collision)

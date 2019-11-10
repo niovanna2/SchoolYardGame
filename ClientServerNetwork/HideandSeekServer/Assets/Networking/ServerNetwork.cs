@@ -1132,19 +1132,12 @@ public class ServerNetwork : UCNetwork
         SendMessage("OnInstantiateNetworkObject", iod);
         //Debug.Log("Instantiate: " + newObject.prefabName + " in " + newObject.areaId + " with id " + newObject.networkId);
 
-        if (networkObjects.Count == 1) // if this is the first person in the server they are a seeker
+        /*if (networkObjects.Count == 1) // if this is the first person in the server they are a seeker
         {
             ExampleServer.instance.PlayerIsSeeking(newObject.networkId);
             newObject.isSeeking = true;
-        }
+        } */
         ExampleServer.instance.players[ExampleServer.instance.players.Count - 1].playerObject = newObject;
-        foreach(ExampleServer.Player player in ExampleServer.instance.players)
-        {
-            if(player.playerObject.isSeeking == true)
-            {
-                ExampleServer.instance.PlayerIsSeeking(player.playerObject.networkId);
-            }
-        }
 
         return networkObjects[aNetworkId];
     }

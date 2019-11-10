@@ -13,6 +13,8 @@ public class ExampleServer : MonoBehaviour
 
     public int portNumber = 603;
 
+    private float gameTime;
+
     // Stores a player
     public class Player
     {
@@ -194,10 +196,16 @@ public class ExampleServer : MonoBehaviour
                 gameState = GameState.endgame;
                 serverNet.CallRPC("EndGame", UCNetwork.MessageReceiver.AllClients, -1);
             }
+
+            gameTime -= Time.deltaTime;
+            if (gameTime <= 0)
+            {
+                gameState = GameState.endgame;
+            }
         }
         else if (gameState == GameState.endgame)
         {
-
+            Debug.Log("Game Ended");
         }
     }
 
@@ -216,6 +224,7 @@ public class ExampleServer : MonoBehaviour
                 serverNet.CallRPC("PlayerIsNotSeeker", UCNetwork.MessageReceiver.AllClients, players[i].playerObject.networkId, players[i].playerObject.networkId);
             }
         }
+        gameTime = 45;
     }
 
     public void Slap() //look a few spaces in front of the player and see if anyone is there
