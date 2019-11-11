@@ -20,8 +20,10 @@ public class TerrianGenerator : MonoBehaviour
 
     public MemoryStream memoryStream;
 
-    void Start()
+    public void GetTerrain(int seed)
     {
+        Random.InitState(seed);
+
         offsetX = Random.Range(0f, 99999f);
         offsetY = Random.Range(0f, 99999f);
         terrain = GetComponent<Terrain>();
@@ -43,7 +45,7 @@ public class TerrianGenerator : MonoBehaviour
 
     TerrainData GenerateTerrain(TerrainData terrainData)
     {
-        //terrainData.heightmapResolution = width + 1;
+        terrainData.heightmapResolution = width + 1;
 
         terrainData.size = new Vector3(width, depth, height);
         terrainData.SetHeights(0, 0, GenerateHeights());

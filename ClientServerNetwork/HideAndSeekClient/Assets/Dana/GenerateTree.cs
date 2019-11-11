@@ -10,8 +10,10 @@ public class GenerateTree : MonoBehaviour
     public List<GameObject> spawnPoints;
     public GameObject spawnPointPref;
 
-    private void Start()
+    public void GetTree(int seed)
     {
+        Random.InitState(seed);
+
         int i = 0;
         mapObjects = new List<GameObject>();
         terrainData = tg.terrain.terrainData;

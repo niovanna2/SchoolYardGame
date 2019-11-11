@@ -12,16 +12,13 @@ public class PaintTerrain : MonoBehaviour
     public int distanceBetween = 1000;
     public int count = 0;
 
-    void Awake()
+    public void GetPaint(int seed)
     {
-        terrainData = Terrain.activeTerrain.terrainData;
-        // get unit in terrain scale (0..1)
-        unit = 1f / (terrainData.size.x - 1);
-    }
-
-    void Start()
-    {
+        Random.InitState(seed);
+        
         AssignSplatMap();
+        terrainData = Terrain.activeTerrain.terrainData;
+        unit = 1f / (terrainData.size.x - 1);
     }
 
     void AssignSplatMap()
