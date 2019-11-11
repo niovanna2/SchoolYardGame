@@ -13,6 +13,7 @@ public class Receiver : MonoBehaviour
             GenerateTree.instance.GetTree(seed);
             TerrianGenerator.instance.GetTerrain(seed);
             PaintTerrain.instance.GetPaint(seed);
+            SpawnPoints.instance.GetSpawnPoints(seed);
         }
         catch(Exception e)
         {
