@@ -5,12 +5,25 @@ using System.Linq;
 
 public class PaintTerrain : MonoBehaviour
 {
+    public static PaintTerrain instance;
     float unit;
 
     TerrainData terrainData;
     public GenerateTree tree;
     public int distanceBetween = 1000;
     public int count = 0;
+
+    private void Start()
+    {
+        if(instance != null && instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
 
     public void GetPaint(int seed)
     {

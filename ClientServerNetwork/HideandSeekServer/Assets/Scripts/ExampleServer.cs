@@ -15,6 +15,8 @@ public class ExampleServer : MonoBehaviour
 
     private float gameTime;
 
+    public static int seed;
+
     // Stores a player
     public class Player
     {
@@ -52,6 +54,7 @@ public class ExampleServer : MonoBehaviour
             Debug.Log("ServerNetwork component added.");
         }
 
+        seed = UnityEngine.Random.Range(int.MinValue, int.MaxValue);
         //serverNet.EnableLogging("rpcLog.txt");
     }
 
@@ -80,6 +83,8 @@ public class ExampleServer : MonoBehaviour
 
     void OnClientConnected(long aClientId)
     {
+        Debug.Log("Calling build terrain with seed " + seed);
+        serverNet.CallRPC("BuildTerrain", aClientId, -1, seed);
         // Set the isConnected to true on the player
         foreach (Player p in players)
         {
@@ -95,7 +100,7 @@ public class ExampleServer : MonoBehaviour
             {
                 serverNet.CallRPC("PlayerIsNotSeeker", aClientId, p.playerObject.networkId, p.playerObject.networkId);
             }
-        }
+        }        
 
         /*
         serverNet.CallRPC("RPCTest", UCNetwork.MessageReceiver.AllClients, -1, 45);
@@ -224,6 +229,8 @@ public class ExampleServer : MonoBehaviour
                 serverNet.CallRPC("PlayerIsNotSeeker", UCNetwork.MessageReceiver.AllClients, players[i].playerObject.networkId, players[i].playerObject.networkId);
             }
         }
+        //UnityEngine.Random.Range(int.MinValue, int.MaxValue);
+        //serverNet.CallRPC("BuildTerrain", UCNetwork.MessageReceiver.AllClients, -1, UnityEngine.Random.Range(int.MinValue, int.MaxValue));
         gameTime = 45;
     }
 

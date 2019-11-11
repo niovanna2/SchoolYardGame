@@ -6,6 +6,7 @@ using System.Text;
 
 public class TerrianGenerator : MonoBehaviour
 {
+    public static TerrianGenerator instance;
     public int depth = 20;
 
     public int width = 256;
@@ -19,6 +20,18 @@ public class TerrianGenerator : MonoBehaviour
     public Terrain terrain;
 
     public MemoryStream memoryStream;
+
+    private void Start()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
 
     public void GetTerrain(int seed)
     {

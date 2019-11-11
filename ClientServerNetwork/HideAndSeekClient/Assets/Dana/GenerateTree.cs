@@ -4,11 +4,24 @@ using UnityEngine;
 
 public class GenerateTree : MonoBehaviour
 {
+    public static GenerateTree instance;
     public TerrianGenerator tg;
     TerrainData terrainData;
     List<GameObject> mapObjects;
     public List<GameObject> spawnPoints;
     public GameObject spawnPointPref;
+
+    private void Start()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
 
     public void GetTree(int seed)
     {
