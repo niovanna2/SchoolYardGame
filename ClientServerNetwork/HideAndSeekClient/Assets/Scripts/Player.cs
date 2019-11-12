@@ -67,28 +67,36 @@ public class Player : MonoBehaviour {
             rb.velocity.z * (1.0f - (Time.fixedDeltaTime * dragScalar)));
     }
 
-    public void PlayerIsSeeker(int networkId) //The player is now a seeker
+    public void Seeker(int networkId) //The player is now a seeker
     {
-        seeking = true;
-        speed = seekerSpeed;
-        GetComponent<Renderer>().material.color = new Color(1, 0, 0);
-        //transform.position = SpawnPoints.instance.seekerSpawnPoint.transform.position;
+        if(GetComponent<NetworkSync>().GetId() == networkId)
+        {
+            seeking = true;
+            speed = seekerSpeed;
+            GetComponent<Renderer>().material.color = new Color(1, 0, 0);
+            //transform.position = SpawnPoints.instance.seekerSpawnPoint.transform.position;
+        }
+
     }
 
-    public void PlayerIsNotSeeker(int networkId) //The player is now a seeker
+    public void NotSeeker(int networkId) //The player is not a seeker
     {
-        seeking = false;
-        speed = defaultSpeed;
-        GetComponent<Renderer>().material.color = new Color(0, 1, 0);
-        //try
-        //{
-        //    int slot = networkId % SpawnPoints.instance.spawnPoints.Count;
-        //    transform.position = SpawnPoints.instance.spawnPoints[slot].transform.position;
-        //}
-        //catch(Exception e)
-        //{
-        //    Debug.Log(e.Message);
-        //}
+        if (GetComponent<NetworkSync>().GetId() == networkId)
+        {
+            seeking = false;
+            speed = defaultSpeed;
+            GetComponent<Renderer>().material.color = new Color(0, 1, 0);
+            //try
+            //{
+            //    int slot = networkId % SpawnPoints.instance.spawnPoints.Count;
+            //    transform.position = SpawnPoints.instance.spawnPoints[slot].transform.position;
+            //}
+            //catch(Exception e)
+            //{
+            //    Debug.Log(e.Message);
+            //}
+        }
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -102,5 +110,9 @@ public class Player : MonoBehaviour {
         {
             transform.position = new Vector3(0, 20, 0);
         }
+        /*else if(collision.collider.tag == "Player" && seeking)
+        {
+            clientEx.clientNet.CallRPC("PlayerIsNowSeeking", UCNetwork.MessageReceiver.ServerOnly, -1, collision.gameObject.GetComponent<NetworkSync>().GetId());
+        } */
     }
 }

@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void EndGame()
+    public void EndGame()
     {
         gameState = GameState.endgame;
         SceneManager.LoadScene(pregame);

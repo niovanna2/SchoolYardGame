@@ -162,6 +162,30 @@ public class ExampleClient : MonoBehaviour
             clientNet.Disconnect("Peace out");
         }
     }
+
+    public void PlayerIsNotSeeker(int networkId)
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach(GameObject p in players)
+        {
+            if(p.GetComponent<NetworkSync>().GetId() == networkId)
+            {
+                p.GetComponent<Player>().NotSeeker(networkId);
+            }
+        }
+    }
+
+    public void PlayerIsSeeker(int networkId)
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject p in players)
+        {
+            if (p.GetComponent<NetworkSync>().GetId() == networkId)
+            {
+                p.GetComponent<Player>().Seeker(networkId);
+            }
+        }
+    }
 }
 
 

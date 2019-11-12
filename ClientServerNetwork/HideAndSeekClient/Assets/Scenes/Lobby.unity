@@ -251,6 +251,8 @@ MonoBehaviour:
   server: {fileID: 575254262}
   port: {fileID: 612112024}
   client: {fileID: 1385401858}
+  manager: {fileID: 1385401861}
+  titleScreen: {fileID: 248918549}
 --- !u!4 &210303733
 Transform:
   m_ObjectHideFlags: 0

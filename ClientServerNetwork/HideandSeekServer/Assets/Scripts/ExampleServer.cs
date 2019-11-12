@@ -143,9 +143,17 @@ public class ExampleServer : MonoBehaviour
         }
     }
 
-    public void PlayerIsSeeking(int networkId) //This RPC will tell the player they are seeking
+    public void PlayerIsNowSeeking(int networkId) //This RPC will tell the player they are seeking
     {
-        serverNet.CallRPC("PlayerIsSeeker", UCNetwork.MessageReceiver.AllClients, networkId, networkId);
+        //serverNet.CallRPC("PlayerIsSeeker", UCNetwork.MessageReceiver.AllClients, networkId, networkId);
+        foreach(Player p in players)
+        {
+            if(p.playerObject.networkId == networkId)
+            {
+                serverNet.CallRPC("PlayerIsSeeker", UCNetwork.MessageReceiver.AllClients, -1, p.playerObject.networkId);
+                p.playerObject.isSeeking = true;
+            }
+        }
     }
 
     private void Update()
@@ -178,11 +186,12 @@ public class ExampleServer : MonoBehaviour
                 {
                     if (Vector3.Distance(playOb.playerObject.position, playOb2.playerObject.position) < .5f && playOb != playOb2)
                     {
-                        Debug.Log("Players are touching");
+                        //Debug.Log("Players are touching");
                         if (playOb2.playerObject.isSeeking == true)
                         {
                             playOb.playerObject.isSeeking = true;
-                            serverNet.CallRPC("PlayerIsSeeker", UCNetwork.MessageReceiver.AllClients, playOb.playerObject.networkId, playOb.playerObject.networkId);
+                            serverNet.CallRPC("PlayerIsSeeker", UCNetwork.MessageReceiver.AllClients, -1, playOb.playerObject.networkId);
+                            Debug.Log("New Player Seeking");
                         }
                     }
                 }
@@ -200,17 +209,31 @@ public class ExampleServer : MonoBehaviour
             {
                 gameState = GameState.endgame;
                 serverNet.CallRPC("EndGame", UCNetwork.MessageReceiver.AllClients, -1);
+                Debug.Log("Game Ended");
+                ResetGame();
             }
 
             gameTime -= Time.deltaTime;
             if (gameTime <= 0)
             {
                 gameState = GameState.endgame;
+                serverNet.CallRPC("EndGame", UCNetwork.MessageReceiver.AllClients, -1);
+                Debug.Log("Game Ended");
+                ResetGame();
             }
         }
         else if (gameState == GameState.endgame)
         {
-            Debug.Log("Game Ended");
+            gameState = GameState.pregame;
+        }
+    }
+
+    public void ResetGame()
+    {
+        foreach (Player p in players)
+        {
+            p.isReady = false;
+            //serverNet.CallRPC("PlayerIsNotSeeker", UCNetwork.MessageReceiver.AllClients, -1, p.playerObject.networkId);
         }
     }
 
@@ -222,11 +245,12 @@ public class ExampleServer : MonoBehaviour
         {
             if (i % 5 == 0)
             {
-                serverNet.CallRPC("PlayerIsSeeker", UCNetwork.MessageReceiver.AllClients, players[i].playerObject.networkId, players[i].playerObject.networkId);
+                serverNet.CallRPC("PlayerIsSeeker", UCNetwork.MessageReceiver.AllClients, -1, players[i].playerObject.networkId);
+                players[i].playerObject.isSeeking = true;
             }
             else
             {
-                serverNet.CallRPC("PlayerIsNotSeeker", UCNetwork.MessageReceiver.AllClients, players[i].playerObject.networkId, players[i].playerObject.networkId);
+                serverNet.CallRPC("PlayerIsNotSeeker", UCNetwork.MessageReceiver.AllClients, -1, players[i].playerObject.networkId);
             }
         }
         //UnityEngine.Random.Range(int.MinValue, int.MaxValue);
@@ -245,7 +269,8 @@ public class ExampleServer : MonoBehaviour
                     if (Vector3.Distance(player1.playerObject.rotation * Vector3.forward, player2.playerObject.position) < 1.5f && player2 != player1)
                     {
                         Debug.Log("Slapped");
-                        serverNet.CallRPC("PlayerIsSeeker", UCNetwork.MessageReceiver.AllClients, player2.playerObject.networkId, player2.playerObject.networkId);
+                        serverNet.CallRPC("PlayerIsSeeker", UCNetwork.MessageReceiver.AllClients, -1, player2.playerObject.networkId);
+                        player2.playerObject.isSeeking = true;
                     }
                 }
             }
