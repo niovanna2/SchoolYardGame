@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -53,6 +54,26 @@ public class GameManager : MonoBehaviour
         gameState = GameState.running;
         players = GetPlayers();
         SceneManager.LoadScene(running);
+        foreach(var p in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            if(p.GetComponent<Player>().seeking)
+            {
+                transform.position = SpawnPoints.instance.seekerSpawnPoint.transform.position;
+            }
+            else
+            {
+                try
+                {
+                    //p.GetComponent<NetworkSync>().GetId();
+                    int slot = p.GetComponent<NetworkSync>().GetId() % SpawnPoints.instance.spawnPoints.Count;
+                    transform.position = SpawnPoints.instance.spawnPoints[slot].transform.position;
+                }
+                catch (Exception e)
+                {
+                    Debug.Log(e.Message);
+                }
+            }
+        }
     }
 
     private void EndGame()

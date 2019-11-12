@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class Player : MonoBehaviour {
 
@@ -60,7 +61,10 @@ public class Player : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        rb.velocity *= 1.0f - (Time.fixedDeltaTime * dragScalar);
+        rb.velocity = new Vector3(
+            rb.velocity.x * (1.0f - (Time.fixedDeltaTime * dragScalar)),
+            rb.velocity.y,
+            rb.velocity.z * (1.0f - (Time.fixedDeltaTime * dragScalar)));
     }
 
     public void PlayerIsSeeker(int networkId) //The player is now a seeker
@@ -68,6 +72,7 @@ public class Player : MonoBehaviour {
         seeking = true;
         speed = seekerSpeed;
         GetComponent<Renderer>().material.color = new Color(1, 0, 0);
+        //transform.position = SpawnPoints.instance.seekerSpawnPoint.transform.position;
     }
 
     public void PlayerIsNotSeeker(int networkId) //The player is now a seeker
@@ -75,13 +80,27 @@ public class Player : MonoBehaviour {
         seeking = false;
         speed = defaultSpeed;
         GetComponent<Renderer>().material.color = new Color(0, 1, 0);
+        //try
+        //{
+        //    int slot = networkId % SpawnPoints.instance.spawnPoints.Count;
+        //    transform.position = SpawnPoints.instance.spawnPoints[slot].transform.position;
+        //}
+        //catch(Exception e)
+        //{
+        //    Debug.Log(e.Message);
+        //}
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.collider.tag == "ResourceNode")
         {
+            ready = true;
             clientNet.CallRPC("PlayerIsReady", UCNetwork.MessageReceiver.ServerOnly, -1);
+        }
+        else if(collision.collider.tag == "Respawn")
+        {
+            transform.position = new Vector3(0, 20, 0);
         }
     }
 }

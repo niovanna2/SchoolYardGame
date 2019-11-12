@@ -144,7 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpeed: 500
   seekerSpeed: 750
-  dragScalar: 3
+  dragScalar: 1
   seeking: 0
   ready: 0
 --- !u!54 &-2413475969054370843
