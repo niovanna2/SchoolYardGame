@@ -8,7 +8,7 @@ public class Receiver : MonoBehaviour
     public void BuildTerrain(int seed)
     {
         Debug.Log("BuildTerrain has been called with seed " + seed);
-        clearMap(seed);
+
         getTerrain(seed);
         getTree(seed);
         getPaint(seed);
@@ -30,9 +30,5 @@ public class Receiver : MonoBehaviour
     private void getSpawns(int seed)
     {
         SpawnPoints.instance.GetSpawnPoints(seed);
-    }
-    private void clearMap(int seed)
-    {
-        GenerateTree.instance.ClearMap(seed);
     }
 }

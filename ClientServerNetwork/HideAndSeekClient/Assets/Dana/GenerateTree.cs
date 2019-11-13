@@ -19,13 +19,14 @@ public class GenerateTree : MonoBehaviour
         {
             instance = this;
         }
+        mapObjects = new List<GameObject>();
     }
 
     public void GetTree(int seed)
     {
         Random.InitState(seed);
-
-        mapObjects = new List<GameObject>();
+        ClearMap();
+        
         terrainData = tg.terrain.terrainData;
         for (float x = 0; x < terrainData.heightmapWidth; x++)
         {
@@ -83,9 +84,8 @@ public class GenerateTree : MonoBehaviour
         tg.UpdateMemoryStream();
     }
 
-    public void ClearMap(int seed)
+    public void ClearMap()
     {
-        Random.InitState(seed);
         ArrayList newTrees = new ArrayList();
         terrainData = tg.terrain.terrainData;
         terrainData.treeInstances = (TreeInstance[])newTrees.ToArray(typeof(TreeInstance));
