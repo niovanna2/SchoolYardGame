@@ -186,9 +186,9 @@ public class ExampleServer : MonoBehaviour
             {
                 foreach (Player playOb2 in players)
                 {
-                    if (Vector3.Distance(playOb.playerObject.position, playOb2.playerObject.position) < .5f && playOb != playOb2)
+                    if (Vector3.Distance(playOb.playerObject.position, playOb2.playerObject.position) < 1f && playOb != playOb2)
                     {
-                        //Debug.Log("Players are touching");
+                        Debug.Log("Players are touching");
                         if (playOb2.playerObject.isSeeking == true)
                         {
                             playOb.playerObject.isSeeking = true;

@@ -75,7 +75,7 @@ public class Player : MonoBehaviour {
             rb.velocity.z * (1.0f - (Time.fixedDeltaTime * dragScalar)));
     }
 
-    public void PlayerIsSeeker(int networkId) //The player is now a seeker
+    public void Seeker(int networkId) //The player is now a seeker
     {
         if(GetComponent<NetworkSync>().GetId() == networkId)
         {
