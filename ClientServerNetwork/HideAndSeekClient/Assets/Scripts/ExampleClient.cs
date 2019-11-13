@@ -175,7 +175,7 @@ public class ExampleClient : MonoBehaviour
         }
     }
 
-    public void PlayerIsSeeker(int networkId)
+    public void PlayerIsSeekerTest(int networkId)
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject p in players)
