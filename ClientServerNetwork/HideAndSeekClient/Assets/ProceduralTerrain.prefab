@@ -96,7 +96,7 @@ MonoBehaviour:
   scale: 10
   offsetX: 100
   offsetY: 100
-  terrain: {fileID: 0}
+  terrain: {fileID: 852739241533697131}
 --- !u!114 &852739241533697133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,6 +125,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tg: {fileID: 852739241533697129}
-  spawnPoints: []
-  spawnPointPref: {fileID: 3602085821166892850, guid: dfbaecf577e03304d89c000bf00e3c27,
-    type: 3}

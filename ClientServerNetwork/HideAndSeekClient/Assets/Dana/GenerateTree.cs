@@ -90,4 +90,8 @@ public class GenerateTree : MonoBehaviour
         mapObjects.Clear();
     }
 
+    private void OnDestroy()
+    {
+        instance = null;
+    }
 }

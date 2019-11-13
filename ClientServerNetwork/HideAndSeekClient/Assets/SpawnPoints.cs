@@ -25,13 +25,13 @@ public class SpawnPoints : MonoBehaviour
         {
             instance = this;
         }
-        terrainData = Terrain.activeTerrain.terrainData;//gameObject.GetComponent<TerrianGenerator>().terrain.terrainData;
+        //gameObject.GetComponent<TerrianGenerator>().terrain.terrainData;
     }
 
     public void GetSpawnPoints(int seed)
     {
         Random.InitState(seed);
-
+        terrainData = Terrain.activeTerrain.terrainData;
         seekerSpawnPoint = Instantiate(spawnPointPref);
         seekerSpawnPoint.transform.position = new Vector3(128, terrainData.size.y, 128);
         

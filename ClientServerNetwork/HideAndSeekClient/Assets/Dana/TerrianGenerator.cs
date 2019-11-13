@@ -86,4 +86,9 @@ public class TerrianGenerator : MonoBehaviour
 
         return Mathf.PerlinNoise(xCoord, yCoord);
     }
+
+    private void OnDestroy()
+    {
+        instance = null;
+    }
 }
