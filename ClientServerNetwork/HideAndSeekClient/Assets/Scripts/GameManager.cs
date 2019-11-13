@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
-        GenerateTree.instance.ClearMap();
     }
 
     // Start is called before the first frame update
