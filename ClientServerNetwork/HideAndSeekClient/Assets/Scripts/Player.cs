@@ -4,9 +4,9 @@ using System;
 
 public class Player : MonoBehaviour {
 
-    [SerializeField] float defaultSpeed = 500.0f;
+    [SerializeField] float defaultSpeed = 550.0f;
     [SerializeField] float seekerSpeed = 750.0f;
-    float speed = 500.0f;
+    float speed = 550.0f;
     [SerializeField] float dragScalar = 1.0f;
     public bool seeking;
     public bool ready = false;
@@ -49,7 +49,15 @@ public class Player : MonoBehaviour {
             //slappage
             if(Input.GetButtonDown("Slap") && seeking == true)
             {
-                clientEx.clientNet.CallRPC("Slap", UCNetwork.MessageReceiver.ServerOnly, -1);
+                //clientEx.clientNet.CallRPC("Slap", UCNetwork.MessageReceiver.ServerOnly, -1);
+                RaycastHit hitObject;
+                if(Physics.Raycast(Vector3.forward, Vector3.forward * 1.5f, out hitObject))
+                {
+                    if(hitObject.transform.gameObject.tag == "Player")
+                    {
+                        clientEx.clientNet.CallRPC("PlayerIsNowSeeking", UCNetwork.MessageReceiver.ServerOnly, -1, hitObject.transform.gameObject.GetComponent<NetworkSync>().GetId());
+                    }
+                }
             }
             //Jumping
             if(Input.GetButtonDown("Jump"))

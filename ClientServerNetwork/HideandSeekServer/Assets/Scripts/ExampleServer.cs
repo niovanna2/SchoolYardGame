@@ -151,6 +151,7 @@ public class ExampleServer : MonoBehaviour
             if(p.playerObject.networkId == networkId)
             {
                 serverNet.CallRPC("PlayerIsSeeker", UCNetwork.MessageReceiver.AllClients, -1, p.playerObject.networkId);
+                Debug.Log("Player " + p.playerObject.networkId + " is now seeking");
                 p.playerObject.isSeeking = true;
             }
         }
