@@ -17,6 +17,7 @@ public class Receiver : MonoBehaviour
         }
         catch(Exception e)
         {
+            Debug.Log(e.StackTrace);
             Debug.Log(e.Message);
         }
     }

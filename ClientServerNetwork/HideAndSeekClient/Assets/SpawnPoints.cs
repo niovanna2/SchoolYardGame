@@ -26,7 +26,7 @@ public class SpawnPoints : MonoBehaviour
             instance = this;
         }
 
-        terrainData = gameObject.GetComponent<TerrianGenerator>().terrain.terrainData;
+        terrainData = TerrianGenerator.instance.terrain.terrainData;
     }
 
     public void GetSpawnPoints(int seed)

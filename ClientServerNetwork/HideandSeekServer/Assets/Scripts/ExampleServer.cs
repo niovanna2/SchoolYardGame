@@ -162,13 +162,14 @@ public class ExampleServer : MonoBehaviour
         {
             // Are all of the players ready?
             bool allPlayersReady = true;
-            if (players.Count > 1)
+            if (players.Count > 0)
             {
                 foreach (Player p in players)
                 {
                     if (!p.isReady)
                     {
                         allPlayersReady = false;
+                        break;
                     }
                 }
                 if (allPlayersReady)
@@ -180,47 +181,47 @@ public class ExampleServer : MonoBehaviour
         }
         else if (gameState == GameState.running)
         {
-            foreach (Player playOb in players)
-            {
-                foreach (Player playOb2 in players)
-                {
-                    if (Vector3.Distance(playOb.playerObject.position, playOb2.playerObject.position) < .5f && playOb != playOb2)
-                    {
-                        //Debug.Log("Players are touching");
-                        if (playOb2.playerObject.isSeeking == true)
-                        {
-                            playOb.playerObject.isSeeking = true;
-                            serverNet.CallRPC("PlayerIsSeeker", UCNetwork.MessageReceiver.AllClients, -1, playOb.playerObject.networkId);
-                            Debug.Log("New Player Seeking");
-                        }
-                    }
-                }
-            }
+            //foreach (Player playOb in players)
+            //{
+            //    foreach (Player playOb2 in players)
+            //    {
+            //        if (Vector3.Distance(playOb.playerObject.position, playOb2.playerObject.position) < .5f && playOb != playOb2)
+            //        {
+            //            //Debug.Log("Players are touching");
+            //            if (playOb2.playerObject.isSeeking == true)
+            //            {
+            //                playOb.playerObject.isSeeking = true;
+            //                serverNet.CallRPC("PlayerIsSeeker", UCNetwork.MessageReceiver.AllClients, -1, playOb.playerObject.networkId);
+            //                Debug.Log("New Player Seeking");
+            //            }
+            //        }
+            //    }
+            //}
 
-            int hiders = players.Count;
-            foreach (Player p in players)
-            {
-                if (p.playerObject.isSeeking)
-                {
-                    hiders--;
-                }
-            }
-            if (hiders <= 0)
-            {
-                gameState = GameState.endgame;
-                serverNet.CallRPC("EndGame", UCNetwork.MessageReceiver.AllClients, -1);
-                Debug.Log("Game Ended");
-                ResetGame();
-            }
+            //int hiders = players.Count;
+            //foreach (Player p in players)
+            //{
+            //    if (p.playerObject.isSeeking)
+            //    {
+            //        hiders--;
+            //    }
+            //}
+            //if (hiders <= 0)
+            //{
+            //    gameState = GameState.endgame;
+            //    serverNet.CallRPC("EndGame", UCNetwork.MessageReceiver.AllClients, -1);
+            //    Debug.Log("Game Ended");
+            //    ResetGame();
+            //}
 
-            gameTime -= Time.deltaTime;
-            if (gameTime <= 0)
-            {
-                gameState = GameState.endgame;
-                serverNet.CallRPC("EndGame", UCNetwork.MessageReceiver.AllClients, -1);
-                Debug.Log("Game Ended");
-                ResetGame();
-            }
+            //gameTime -= Time.deltaTime;
+            //if (gameTime <= 0)
+            //{
+            //    gameState = GameState.endgame;
+            //    serverNet.CallRPC("EndGame", UCNetwork.MessageReceiver.AllClients, -1);
+            //    Debug.Log("Game Ended");
+            //    ResetGame();
+            //}
         }
         else if (gameState == GameState.endgame)
         {
@@ -253,8 +254,8 @@ public class ExampleServer : MonoBehaviour
                 serverNet.CallRPC("PlayerIsNotSeeker", UCNetwork.MessageReceiver.AllClients, -1, players[i].playerObject.networkId);
             }
         }
-        //UnityEngine.Random.Range(int.MinValue, int.MaxValue);
-        //serverNet.CallRPC("BuildTerrain", UCNetwork.MessageReceiver.AllClients, -1, UnityEngine.Random.Range(int.MinValue, int.MaxValue));
+        UnityEngine.Random.Range(int.MinValue, int.MaxValue);
+        serverNet.CallRPC("BuildTerrain", UCNetwork.MessageReceiver.AllClients, -1, UnityEngine.Random.Range(int.MinValue, int.MaxValue));
         gameTime = 45;
     }
 

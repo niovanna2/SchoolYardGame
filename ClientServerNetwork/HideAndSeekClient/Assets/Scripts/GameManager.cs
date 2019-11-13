@@ -78,6 +78,10 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
+        foreach(var p in players)
+        {
+            p.transform.position = new Vector3(0, 20, 0);
+        }
         gameState = GameState.endgame;
         SceneManager.LoadScene(pregame);
     }
