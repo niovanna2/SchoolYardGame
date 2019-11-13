@@ -19,6 +19,7 @@ public class GenerateTree : MonoBehaviour
         {
             instance = this;
         }
+        ClearMap()
     }
 
     public void GetTree(int seed)
