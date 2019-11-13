@@ -28,9 +28,9 @@ public class PaintTerrain : MonoBehaviour
     public void GetPaint(int seed)
     {
         Random.InitState(seed);
-        
-        AssignSplatMap();
         terrainData = Terrain.activeTerrain.terrainData;
+        AssignSplatMap();
+        
         unit = 1f / (terrainData.size.x - 1);
     }
 
