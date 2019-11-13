@@ -19,7 +19,7 @@ public class GenerateTree : MonoBehaviour
         {
             instance = this;
         }
-        ClearMap()
+        ClearMap();
     }
 
     public void GetTree(int seed)
@@ -87,7 +87,7 @@ public class GenerateTree : MonoBehaviour
     public void ClearMap()
     {
         ArrayList newTrees = new ArrayList();
-        terrainData.treeInstances = (TreeInstance[])newTrees.ToArray(typeof(TreeInstance));
+        instance.terrainData.treeInstances = (TreeInstance[])newTrees.ToArray(typeof(TreeInstance));
         mapObjects.Clear();
     }
 
