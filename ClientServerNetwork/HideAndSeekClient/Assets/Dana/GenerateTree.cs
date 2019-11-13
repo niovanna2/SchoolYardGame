@@ -81,12 +81,10 @@ public class GenerateTree : MonoBehaviour
 
 
         tg.UpdateMemoryStream();
-        StartCoroutine(ClearMap());
     }
 
-    IEnumerator ClearMap()
+    public void ClearMap()
     {
-        yield return new WaitForSeconds(3);
         ArrayList newTrees = new ArrayList();
         terrainData.treeInstances = (TreeInstance[])newTrees.ToArray(typeof(TreeInstance));
         mapObjects.Clear();
