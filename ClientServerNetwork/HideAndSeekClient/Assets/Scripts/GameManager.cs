@@ -54,7 +54,8 @@ public class GameManager : MonoBehaviour
         gameState = GameState.running;
         players = GetPlayers();
         SceneManager.LoadScene(running);
-        foreach(var p in GameObject.FindGameObjectsWithTag("Player"))
+        GenerateTree.instance.ClearMap();
+        foreach (var p in GameObject.FindGameObjectsWithTag("Player"))
         {
             if(p.GetComponent<Player>().seeking)
             {
@@ -84,6 +85,5 @@ public class GameManager : MonoBehaviour
         }
         gameState = GameState.endgame;
         SceneManager.LoadScene(pregame);
-        GenerateTree.instance.ClearMap();
     }
 }
