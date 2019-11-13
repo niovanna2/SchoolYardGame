@@ -33,7 +33,7 @@ public class GenerateTree : MonoBehaviour
             {
                 Terrain terrain = GetComponent<Terrain>();
                 int r = Random.Range(0, 150);
-                if (r == 0)
+                if (r == 0)//trees
                 {
                     TreeInstance treeTemp = new TreeInstance();
                     
@@ -48,7 +48,7 @@ public class GenerateTree : MonoBehaviour
                 }
 
                 int r1 = Random.Range(0, 50);
-                if (r1 == 0)
+                if (r1 == 0)//flowers and grass
                 {
                     TreeInstance treeTemp = new TreeInstance();
 
@@ -63,14 +63,14 @@ public class GenerateTree : MonoBehaviour
                 }
 
                 int r2 = Random.Range(0, 100);
-                if (r2 == 0)
+                if (r2 == 0)//rocks
                 {
                     TreeInstance treeTemp = new TreeInstance();
 
                     treeTemp.position = new Vector3(x / terrainData.heightmapWidth, 0, z / terrainData.heightmapHeight);
                     treeTemp.prototypeIndex = Random.Range(14, 18);
-                    treeTemp.widthScale = 1f;
-                    treeTemp.heightScale = 1f;
+                    treeTemp.widthScale = 5f;
+                    treeTemp.heightScale = 5f;
                     treeTemp.color = Color.white;
                     treeTemp.lightmapColor = Color.white;
                     terrain.AddTreeInstance(treeTemp);
