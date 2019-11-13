@@ -267,6 +267,69 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &215085503
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 215085505}
+  - component: {fileID: 215085504}
+  - component: {fileID: 215085506}
+  m_Layer: 0
+  m_Name: SpawnPoint Generator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &215085504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215085503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37b597c19b15cdb4aac48c24600d3ede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPoints: []
+  seekerSpawnPoint: {fileID: 0}
+  spawnPointPref: {fileID: 3602085821166892850, guid: dfbaecf577e03304d89c000bf00e3c27,
+    type: 3}
+  maxPlayers: 16
+  radius: 50
+  distanceFromBoarder: 10
+--- !u!4 &215085505
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215085503}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -121.96568, y: -37.936058, z: -571.37604}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &215085506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215085503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81bdde5f35e1fd549a9b0b3b402d31f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &248918549
 GameObject:
   m_ObjectHideFlags: 0
@@ -511,12 +574,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b56fe3ce2ed3182448e23ef844cdf73e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!218 &547581006 stripped
-Terrain:
-  m_CorrespondingSourceObject: {fileID: 852739241533697131, guid: 4082376774d0d6045a0c00484dcb1d23,
-    type: 3}
-  m_PrefabInstance: {fileID: 946619328}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &575254260
 GameObject:
   m_ObjectHideFlags: 0
@@ -1105,26 +1162,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ProceduralTerrain
       objectReference: {fileID: 0}
-    - target: {fileID: 852739241533697131, guid: 4082376774d0d6045a0c00484dcb1d23,
-        type: 3}
-      propertyPath: m_DetailObjectDistance
-      value: 250
-      objectReference: {fileID: 0}
-    - target: {fileID: 852739241533697131, guid: 4082376774d0d6045a0c00484dcb1d23,
-        type: 3}
-      propertyPath: m_TreeMaximumFullLODCount
-      value: 10000
-      objectReference: {fileID: 0}
-    - target: {fileID: 852739241533697131, guid: 4082376774d0d6045a0c00484dcb1d23,
-        type: 3}
-      propertyPath: m_TreeCrossFadeLength
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 852739241533697131, guid: 4082376774d0d6045a0c00484dcb1d23,
-        type: 3}
-      propertyPath: m_TreeBillboardDistance
-      value: 2000
-      objectReference: {fileID: 0}
     - target: {fileID: 852739241533697130, guid: 4082376774d0d6045a0c00484dcb1d23,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1180,12 +1217,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 852739241533697129, guid: 4082376774d0d6045a0c00484dcb1d23,
-        type: 3}
-      propertyPath: terrain
-      value: 
-      objectReference: {fileID: 547581006}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 912394647, guid: 4082376774d0d6045a0c00484dcb1d23, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4082376774d0d6045a0c00484dcb1d23, type: 3}
 --- !u!1 &970424218
 GameObject:
