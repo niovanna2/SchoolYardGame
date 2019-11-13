@@ -191,8 +191,8 @@ public class ExampleServer : MonoBehaviour
                         Debug.Log("Players are touching");
                         if (playOb2.playerObject.isSeeking == true)
                         {
-                            playOb.playerObject.isSeeking = true;
-                            serverNet.CallRPC("PlayerIsSeeker", UCNetwork.MessageReceiver.AllClients, -1, playOb.playerObject.networkId);
+                            //playOb.playerObject.isSeeking = true;
+                            //serverNet.CallRPC("PlayerIsSeeker", UCNetwork.MessageReceiver.AllClients, -1, playOb.playerObject.networkId);
                             Debug.Log("New Player Seeking");
                         }
                     }
@@ -260,20 +260,21 @@ public class ExampleServer : MonoBehaviour
         gameTime = 45;
     }
 
-    public void Slap() //look a few spaces in front of the player and see if anyone is there
+    public void Slap(Vector3 slapPos) //look a few spaces in front of the player and see if anyone is there
     {
         foreach (Player player1 in players)
         {
             if (player1.clientId == serverNet.SendingClientId)
             {
+                Debug.Log("Please slap");
                 foreach (Player player2 in players)
                 {
-                    if (Vector3.Distance(player1.playerObject.rotation * Vector3.forward, player2.playerObject.position) < 1.5f && player2 != player1)
+                    if (Vector3.Distance(slapPos, player2.playerObject.position) < 1.5f && player2 != player1)
                     {
                         Debug.Log("Slapped");
                         serverNet.CallRPC("PlayerIsSeeker", UCNetwork.MessageReceiver.AllClients, -1, player2.playerObject.networkId);
                         player2.playerObject.isSeeking = true;
-                    }
+                    } 
                 }
             }
         }

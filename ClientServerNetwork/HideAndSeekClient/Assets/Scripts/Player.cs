@@ -49,21 +49,18 @@ public class Player : MonoBehaviour {
             //slappage
             if(Input.GetButtonDown("Slap") && seeking == true)
             {
-                //clientEx.clientNet.CallRPC("Slap", UCNetwork.MessageReceiver.ServerOnly, -1);
-                RaycastHit hitObject;
-                if(Physics.Raycast(Vector3.forward, Vector3.forward * 1.5f, out hitObject))
-                {
-                    if(hitObject.transform.gameObject.tag == "Player")
-                    {
-                        clientEx.clientNet.CallRPC("PlayerIsNowSeeking", UCNetwork.MessageReceiver.ServerOnly, -1, hitObject.transform.gameObject.GetComponent<NetworkSync>().GetId());
-                    }
-                }
+                Vector3 slapPos = transform.position + (transform.rotation * Vector3.forward * 2);
+                clientEx.clientNet.CallRPC("Slap", UCNetwork.MessageReceiver.ServerOnly, -1, slapPos);
             }
             //Jumping
             if(Input.GetButtonDown("Jump"))
             {
-                rb.AddRelativeForce(new Vector3(0, 7, 0), ForceMode.Impulse);
+                if(Physics.Raycast(transform.position, Vector3.down, 1))
+                {
+                    rb.AddRelativeForce(new Vector3(0, 7, 0), ForceMode.Impulse);
+                }
             }
+            Debug.DrawRay(transform.position, (transform.rotation * Vector3.forward) * 10);
         }
     }
 
