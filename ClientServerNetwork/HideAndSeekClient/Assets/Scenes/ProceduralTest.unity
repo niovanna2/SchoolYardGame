@@ -603,6 +603,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tg: {fileID: 1932472952}
-  spawnPoints: []
-  spawnPointPref: {fileID: 3602085821166892850, guid: dfbaecf577e03304d89c000bf00e3c27,
-    type: 3}
