@@ -84,5 +84,6 @@ public class GameManager : MonoBehaviour
         }
         gameState = GameState.endgame;
         SceneManager.LoadScene(pregame);
+        GenerateTree.instance.ClearMap();
     }
 }
