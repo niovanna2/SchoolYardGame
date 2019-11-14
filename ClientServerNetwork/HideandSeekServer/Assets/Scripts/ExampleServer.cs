@@ -199,7 +199,6 @@ public class ExampleServer : MonoBehaviour
         //            }
         //        }
         //    }
-
         //    int hiders = players.Count;
         //    foreach (Player p in players)
         //    {
@@ -215,7 +214,6 @@ public class ExampleServer : MonoBehaviour
         //        Debug.Log("Game Ended");
         //        ResetGame();
         //    }
-
         //    gameTime -= Time.deltaTime;
         //    if (gameTime <= 0)
         //    {
