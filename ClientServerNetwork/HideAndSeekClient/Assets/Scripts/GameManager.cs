@@ -3,9 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject endScreen;
+    public Text endGameText;
+
     [SerializeField] string pregame;
     [SerializeField] string running;
     [SerializeField] string endgame;
@@ -76,7 +80,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void EndGame()
+    public void EndGame(bool seekersWon)
     {
         foreach(var p in players)
         {
@@ -84,5 +88,21 @@ public class GameManager : MonoBehaviour
         }
         gameState = GameState.endgame;
         SceneManager.LoadScene(pregame);
+        if(seekersWon == true)
+        {
+            endGameText.text = "Seekers Won!";
+        }
+        else
+        {
+            endGameText.text = "Hiders Won!";
+        }
+        StartCoroutine("EndMessageTimer");
+    }
+
+    public IEnumerator EndMessageTimer()
+    {
+        endScreen.SetActive(true);
+        yield return new WaitForSeconds(3);
+        endScreen.SetActive(false);
     }
 }

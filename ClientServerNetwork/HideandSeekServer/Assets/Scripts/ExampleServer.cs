@@ -210,7 +210,7 @@ public class ExampleServer : MonoBehaviour
             if (hiders <= 0)
             {
                 gameState = GameState.endgame;
-                serverNet.CallRPC("EndGame", UCNetwork.MessageReceiver.AllClients, -1);
+                serverNet.CallRPC("EndGame", UCNetwork.MessageReceiver.AllClients, -1, true);
                 Debug.Log("Game Ended");
                 ResetGame();
             }
@@ -219,7 +219,7 @@ public class ExampleServer : MonoBehaviour
             if (gameTime <= 0)
             {
                 gameState = GameState.endgame;
-                serverNet.CallRPC("EndGame", UCNetwork.MessageReceiver.AllClients, -1);
+                serverNet.CallRPC("EndGame", UCNetwork.MessageReceiver.AllClients, -1, false);
                 Debug.Log("Game Ended");
                 ResetGame();
             }
