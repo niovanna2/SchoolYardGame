@@ -160,27 +160,27 @@ public class ExampleServer : MonoBehaviour
 
     private void Update()
     {
-        if (gameState == GameState.pregame)
-        {
-            // Are all of the players ready?
-            bool allPlayersReady = true;
-            if (players.Count > 0)
-            {
-                foreach (Player p in players)
-                {
-                    if (!p.isReady)
-                    {
-                        allPlayersReady = false;
-                        break;
-                    }
-                }
-                if (allPlayersReady)
-                {
-                    gameState = GameState.running;
-                    EveryoneIsReady();
-                }
-            }
-        }
+        //if (gameState == GameState.pregame)
+        //{
+        //    // Are all of the players ready?
+        //    bool allPlayersReady = true;
+        //    if (players.Count > 0)
+        //    {
+        //        foreach (Player p in players)
+        //        {
+        //            if (!p.isReady)
+        //            {
+        //                allPlayersReady = false;
+        //                break;
+        //            }
+        //        }
+        //        if (allPlayersReady)
+        //        {
+        //            gameState = GameState.running;
+        //            EveryoneIsReady();
+        //        }
+        //    }
+        //}
         //else if (gameState == GameState.running)
         //{
         //    foreach (Player playOb in players)
@@ -210,7 +210,7 @@ public class ExampleServer : MonoBehaviour
         //    if (hiders <= 0)
         //    {
         //        gameState = GameState.endgame;
-        //        serverNet.CallRPC("EndGame", UCNetwork.MessageReceiver.AllClients, -1);
+        //        serverNet.CallRPC("EndGame", UCNetwork.MessageReceiver.AllClients, -1, true);
         //        Debug.Log("Game Ended");
         //        ResetGame();
         //    }
@@ -218,7 +218,7 @@ public class ExampleServer : MonoBehaviour
         //    if (gameTime <= 0)
         //    {
         //        gameState = GameState.endgame;
-        //        serverNet.CallRPC("EndGame", UCNetwork.MessageReceiver.AllClients, -1);
+        //        serverNet.CallRPC("EndGame", UCNetwork.MessageReceiver.AllClients, -1, false);
         //        Debug.Log("Game Ended");
         //        ResetGame();
         //    }
