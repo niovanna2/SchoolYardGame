@@ -31,7 +31,7 @@ public class SpawnPoints : MonoBehaviour
     public void GetSpawnPoints(int seed)
     {
         Random.InitState(seed);
-
+        ClearPoints();
         terrainData = Terrain.activeTerrain.terrainData;
         seekerSpawnPoint = Instantiate(spawnPointPref);
         seekerSpawnPoint.transform.position = new Vector3(128, terrainData.size.y, 128);
@@ -60,7 +60,7 @@ public class SpawnPoints : MonoBehaviour
             else if (r == 2)//(178,246, depth, 10 - 78)
             {
                 GameObject sp = Instantiate(spawnPointPref);
-                sp.transform.position = new Vector3(Random.Range((terrainData.heightmapWidth / 2) + radius, terrainData.heightmapWidth - distanceFromBoarder), terrainData.size.y,
+                sp.transform.position = new Vector3(Random.Range((terrainData.heightmapWidth / 2) + radius, terrainData.heightmapWidth - distanceFromBoarder), terrainData.size.y ,
                     Random.Range(distanceFromBoarder, (terrainData.heightmapHeight / 2) - radius));
                 sp.transform.SetParent(gameObject.transform);
                 spawnPoints.Add(sp);
@@ -75,5 +75,16 @@ public class SpawnPoints : MonoBehaviour
             }
         }
 
+    }
+
+    public void ClearPoints()
+    {
+        foreach(GameObject sp in spawnPoints)
+        {
+            Destroy(sp);
+        }
+        spawnPoints.Clear();
+        List<GameObject> list = new List<GameObject>();
+        spawnPoints = list;
     }
 }
