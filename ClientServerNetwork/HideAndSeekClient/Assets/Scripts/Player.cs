@@ -46,6 +46,11 @@ public class Player : MonoBehaviour {
             //looking left/right
             transform.eulerAngles += new Vector3(0, Input.GetAxis("Mouse X"), 0);
 
+            if(Input.GetButtonDown("Ready"))
+            {
+                ReadyUp();
+            }
+
             //slappage
             if(Input.GetButtonDown("Slap") && seeking == true)
             {
@@ -108,8 +113,7 @@ public class Player : MonoBehaviour {
     {
         if(collision.collider.tag == "ResourceNode")
         {
-            ready = true;
-            clientNet.CallRPC("PlayerIsReady", UCNetwork.MessageReceiver.ServerOnly, -1);
+            ReadyUp();
         }
         else if(collision.collider.tag == "Respawn")
         {
@@ -119,5 +123,11 @@ public class Player : MonoBehaviour {
         {
             clientEx.clientNet.CallRPC("PlayerIsNowSeeking", UCNetwork.MessageReceiver.ServerOnly, -1, collision.gameObject.GetComponent<NetworkSync>().GetId());
         } */
+    }
+
+    private void ReadyUp()
+    {
+        ready = true;
+        clientNet.CallRPC("PlayerIsReady", UCNetwork.MessageReceiver.ServerOnly, -1);
     }
 }
