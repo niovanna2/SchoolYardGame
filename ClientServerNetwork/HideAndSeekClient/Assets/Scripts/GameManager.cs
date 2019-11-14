@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     }
     public GameState gameState = GameState.pregame;
     GameObject[] players;
+    GameObject myPlayer;
 
     private void Awake()
     {
@@ -49,39 +50,40 @@ public class GameManager : MonoBehaviour
         return GameObject.FindGameObjectsWithTag("Player");
     }
 
+    GameObject GetMyPlayer()
+    {
+        foreach(var p in GetPlayers())
+        {
+            if(p.GetComponent<NetworkSync>().owned)
+            {
+                return p;
+            }
+        }
+        return null;
+    }
+
     public void Run()
     {
+        Debug.Log("Run has been called");
         gameState = GameState.running;
-        players = GetPlayers();
+        //players = GetPlayers();
+        myPlayer = GetMyPlayer();
         SceneManager.LoadScene(running);
-        foreach (var p in GameObject.FindGameObjectsWithTag("Player"))
+
+        if (myPlayer.GetComponent<Player>().seeking)
         {
-            if(p.GetComponent<Player>().seeking)
-            {
-                transform.position = SpawnPoints.instance.seekerSpawnPoint.transform.position;
-            }
-            else
-            {
-                try
-                {
-                    //p.GetComponent<NetworkSync>().GetId();
-                    int slot = p.GetComponent<NetworkSync>().GetId() % SpawnPoints.instance.spawnPoints.Count;
-                    transform.position = SpawnPoints.instance.spawnPoints[slot].transform.position;
-                }
-                catch (Exception e)
-                {
-                    Debug.Log(e.Message);
-                }
-            }
+            transform.position = SpawnPoints.instance.seekerSpawnPoint.transform.position;
+        }
+        else
+        {
+            int slot = myPlayer.GetComponent<NetworkSync>().GetId() % SpawnPoints.instance.spawnPoints.Count;
+            myPlayer.transform.position = SpawnPoints.instance.spawnPoints[slot].transform.position;
         }
     }
 
     public void EndGame()
     {
-        foreach(var p in players)
-        {
-            p.transform.position = new Vector3(0, 20, 0);
-        }
+        myPlayer.transform.position = new Vector3(0, 20, 0);
         gameState = GameState.endgame;
         SceneManager.LoadScene(pregame);
     }

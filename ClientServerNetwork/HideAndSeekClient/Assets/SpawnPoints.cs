@@ -35,6 +35,7 @@ public class SpawnPoints : MonoBehaviour
         terrainData = Terrain.activeTerrain.terrainData;
         seekerSpawnPoint = Instantiate(spawnPointPref);
         seekerSpawnPoint.transform.position = new Vector3(128, terrainData.size.y, 128);
+        seekerSpawnPoint.transform.SetParent(gameObject.transform);
         
         //get hidders spawn points; randomly spawned in the area outside of the seeker radius
         for(int i = 0; i < maxPlayers; i++)
@@ -45,13 +46,15 @@ public class SpawnPoints : MonoBehaviour
                 GameObject sp = Instantiate(spawnPointPref);
                 sp.transform.position = new Vector3(Random.Range(distanceFromBoarder, (terrainData.heightmapWidth / 2) - radius), terrainData.size.y,
                     Random.Range(distanceFromBoarder, (terrainData.heightmapHeight / 2) - radius));
-                spawnPoints.Add(sp);
+                sp.transform.SetParent(gameObject.transform);
+                spawnPoints.Add(sp);                
             }
             else if (r==1)//(10 - 78, depth, 178,246)
             {
                 GameObject sp = Instantiate(spawnPointPref);
                 sp.transform.position = new Vector3(Random.Range(distanceFromBoarder, (terrainData.heightmapWidth / 2) - radius), terrainData.size.y,
                     Random.Range((terrainData.heightmapHeight / 2) + radius, terrainData.heightmapHeight - distanceFromBoarder));
+                sp.transform.SetParent(gameObject.transform);
                 spawnPoints.Add(sp);
             }
             else if (r == 2)//(178,246, depth, 10 - 78)
@@ -59,6 +62,7 @@ public class SpawnPoints : MonoBehaviour
                 GameObject sp = Instantiate(spawnPointPref);
                 sp.transform.position = new Vector3(Random.Range((terrainData.heightmapWidth / 2) + radius, terrainData.heightmapWidth - distanceFromBoarder), terrainData.size.y,
                     Random.Range(distanceFromBoarder, (terrainData.heightmapHeight / 2) - radius));
+                sp.transform.SetParent(gameObject.transform);
                 spawnPoints.Add(sp);
             }
             else if (r == 3)//(178,246, depth, 178,246)
@@ -66,6 +70,7 @@ public class SpawnPoints : MonoBehaviour
                 GameObject sp = Instantiate(spawnPointPref);
                 sp.transform.position = new Vector3(Random.Range((terrainData.heightmapWidth / 2) + radius, terrainData.heightmapWidth - distanceFromBoarder), terrainData.size.y,
                     Random.Range((terrainData.heightmapHeight / 2) + radius, terrainData.heightmapHeight - distanceFromBoarder));
+                sp.transform.SetParent(gameObject.transform);
                 spawnPoints.Add(sp);
             }
         }
