@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
 
         if (myPlayer.GetComponent<Player>().seeking)
         {
-            transform.position = SpawnPoints.instance.seekerSpawnPoint.transform.position;
+            myPlayer.transform.position = SpawnPoints.instance.seekerSpawnPoint.transform.position;
         }
         else
         {
