@@ -32,50 +32,65 @@ public class GenerateTree : MonoBehaviour
         {
             for (float z = 0; z < terrainData.heightmapHeight; z++)
             {
+                bool spawn = true;
                 Terrain terrain = GetComponent<Terrain>();
-                int r = Random.Range(0, 150);
-                if (r == 0)//trees
+                Vector3 newpoint = new Vector3(terrainData.heightmapWidth, 0, terrainData.heightmapHeight);
+                Collider[] hit = Physics.OverlapSphere(newpoint, 10);
+
+                foreach(Collider col in hit)
                 {
-                    TreeInstance treeTemp = new TreeInstance();
-                    
-                    treeTemp.position = new Vector3(x / terrainData.heightmapWidth, 0, z / terrainData.heightmapHeight);
-                    treeTemp.prototypeIndex = Random.Range(0,3);
-                    treeTemp.widthScale = 1f;
-                    treeTemp.heightScale = 1f;
-                    treeTemp.color = Color.white;
-                    treeTemp.lightmapColor = Color.white;
-                    terrain.AddTreeInstance(treeTemp);
-                    terrain.Flush();
+                    if (col.tag == "tree")
+                    {
+                        Debug.Log("tree");
+                        spawn = false;
+                    }
                 }
-
-                int r1 = Random.Range(0, 50);
-                if (r1 == 0)//flowers and grass
+                if (spawn)
                 {
-                    TreeInstance treeTemp = new TreeInstance();
+                    int r = Random.Range(0, 150);
+                    if (r == 0)//trees
+                    {
+                        TreeInstance treeTemp = new TreeInstance();
 
-                    treeTemp.position = new Vector3(x / terrainData.heightmapWidth, 0, z / terrainData.heightmapHeight);
-                    treeTemp.prototypeIndex = Random.Range(4, 14);
-                    treeTemp.widthScale = 1f;
-                    treeTemp.heightScale = 1f;
-                    treeTemp.color = Color.white;
-                    treeTemp.lightmapColor = Color.white;
-                    terrain.AddTreeInstance(treeTemp);
-                    terrain.Flush();
-                }
+                        treeTemp.position = new Vector3(x / terrainData.heightmapWidth, 0, z / terrainData.heightmapHeight);
+                        treeTemp.prototypeIndex = Random.Range(0, 3);
+                        treeTemp.widthScale = 1f;
+                        treeTemp.heightScale = 1f;
+                        treeTemp.color = Color.white;
+                        treeTemp.lightmapColor = Color.white;
+                        terrain.AddTreeInstance(treeTemp);
+                        terrain.Flush();
+                    }
 
-                int r2 = Random.Range(0, 100);
-                if (r2 == 0)//rocks
-                {
-                    TreeInstance treeTemp = new TreeInstance();
+                    int r1 = Random.Range(0, 50);
+                    if (r1 == 0)//flowers and grass
+                    {
+                        TreeInstance treeTemp = new TreeInstance();
 
-                    treeTemp.position = new Vector3(x / terrainData.heightmapWidth, 0, z / terrainData.heightmapHeight);
-                    treeTemp.prototypeIndex = Random.Range(14, 18);
-                    treeTemp.widthScale = 1f;
-                    treeTemp.heightScale = 1f;
-                    treeTemp.color = Color.white;
-                    treeTemp.lightmapColor = Color.white;
-                    terrain.AddTreeInstance(treeTemp);
-                    terrain.Flush();
+                        treeTemp.position = new Vector3(x / terrainData.heightmapWidth, 0, z / terrainData.heightmapHeight);
+                        treeTemp.prototypeIndex = Random.Range(4, 14);
+                        treeTemp.widthScale = 1f;
+                        treeTemp.heightScale = 1f;
+                        treeTemp.color = Color.white;
+                        treeTemp.lightmapColor = Color.white;
+                        terrain.AddTreeInstance(treeTemp);
+                        terrain.Flush();
+                    }
+
+                    int r2 = Random.Range(0, 100);
+                    if (r2 == 0)//rocks
+                    {
+                        TreeInstance treeTemp = new TreeInstance();
+
+                        treeTemp.position = new Vector3(x / terrainData.heightmapWidth, 0, z / terrainData.heightmapHeight);
+                        treeTemp.prototypeIndex = Random.Range(14, 18);
+                        treeTemp.widthScale = 1f;
+                        treeTemp.heightScale = 1f;
+                        treeTemp.color = Color.white;
+                        treeTemp.lightmapColor = Color.white;
+                        terrain.AddTreeInstance(treeTemp);
+                        terrain.Flush();
+                    }
                 }
             }
         }

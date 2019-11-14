@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 152629514361749235}
   m_Layer: 0
   m_Name: Rock-2
-  m_TagString: Untagged
+  m_TagString: tree
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -88,7 +88,7 @@ SphereCollider:
   m_GameObject: {fileID: 129970}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 2.6581802
-  m_Center: {x: 0.16156769, y: 1.7266026, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
