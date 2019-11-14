@@ -160,27 +160,27 @@ public class ExampleServer : MonoBehaviour
 
     private void Update()
     {
-        //if (gameState == GameState.pregame)
-        //{
-        //    // Are all of the players ready?
-        //    bool allPlayersReady = true;
-        //    if (players.Count > 0)
-        //    {
-        //        foreach (Player p in players)
-        //        {
-        //            if (!p.isReady)
-        //            {
-        //                allPlayersReady = false;
-        //                break;
-        //            }
-        //        }
-        //        if (allPlayersReady)
-        //        {
-        //            gameState = GameState.running;
-        //            EveryoneIsReady();
-        //        }
-        //    }
-        //}
+        if (gameState == GameState.pregame)
+        {
+            // Are all of the players ready?
+            bool allPlayersReady = true;
+            if (players.Count > 0)
+            {
+                foreach (Player p in players)
+                {
+                    if (!p.isReady)
+                    {
+                        allPlayersReady = false;
+                        break;
+                    }
+                }
+                if (allPlayersReady)
+                {
+                    gameState = GameState.running;
+                    EveryoneIsReady();
+                }
+            }
+        }
         //else if (gameState == GameState.running)
         //{
         //    foreach (Player playOb in players)
