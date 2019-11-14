@@ -99,6 +99,7 @@ public class Player : MonoBehaviour {
             seeking = false;
             speed = defaultSpeed;
             GetComponent<Renderer>().material.color = new Color(0, 1, 0);
+            gameManager.playerStatusText.text = "Hider";
             //try
             //{
             //    int slot = networkId % SpawnPoints.instance.spawnPoints.Count;
