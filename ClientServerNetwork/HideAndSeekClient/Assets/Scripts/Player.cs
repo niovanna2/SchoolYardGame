@@ -12,12 +12,14 @@ public class Player : MonoBehaviour {
     public bool ready = false;
     ExampleClient clientEx;
     ClientNetwork clientNet;
+    GameManager gameManager;
     Rigidbody rb;
 
     private void Start()
     {
         clientEx = FindObjectOfType<ExampleClient>();
         clientNet = FindObjectOfType<ClientNetwork>();
+        gameManager = FindObjectOfType<GameManager>();
         rb = GetComponent<Rigidbody>();
     }
 
@@ -85,6 +87,7 @@ public class Player : MonoBehaviour {
             speed = seekerSpeed;
             GetComponent<Renderer>().material.color = new Color(1, 0, 0);
             //transform.position = SpawnPoints.instance.seekerSpawnPoint.transform.position;
+            gameManager.playerStatusText.text = "Seeker";
         }
 
     }

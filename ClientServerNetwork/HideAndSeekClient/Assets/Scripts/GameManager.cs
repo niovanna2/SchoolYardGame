@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 {
     public GameObject endScreen;
     public Text endGameText;
+    public GameObject gameScreen;
+    public Text playerStatusText;
 
     [SerializeField] string pregame;
     [SerializeField] string running;
@@ -74,19 +76,23 @@ public class GameManager : MonoBehaviour
         myPlayer = GetMyPlayer();
         SceneManager.LoadScene(running);
 
+        gameScreen.SetActive(true);
         if (myPlayer.GetComponent<Player>().seeking)
         {
             myPlayer.transform.position = SpawnPoints.instance.seekerSpawnPoint.transform.position;
+            playerStatusText.text = "Seeker";
         }
         else
         {
             int slot = myPlayer.GetComponent<NetworkSync>().GetId() % SpawnPoints.instance.spawnPoints.Count;
             myPlayer.transform.position = SpawnPoints.instance.spawnPoints[slot].transform.position;
+            playerStatusText.text = "Hider";
         }
     }
 
     public void EndGame(bool seekersWon)
     {
+        gameScreen.SetActive(false);
         myPlayer.transform.position = new Vector3(0, 20, 0);
         gameState = GameState.endgame;
         SceneManager.LoadScene(pregame);

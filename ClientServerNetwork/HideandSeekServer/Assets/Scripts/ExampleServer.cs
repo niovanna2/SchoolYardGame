@@ -181,52 +181,52 @@ public class ExampleServer : MonoBehaviour
                 }
             }
         }
-        //else if (gameState == GameState.running)
-        //{
-        //    foreach (Player playOb in players)
-        //    {
-        //        foreach (Player playOb2 in players)
-        //        {
-        //            if (Vector3.Distance(playOb.playerObject.position, playOb2.playerObject.position) < 1f && playOb != playOb2)
-        //            {
-        //                Debug.Log("Players are touching");
-        //                if (playOb2.playerObject.isSeeking == true)
-        //                {
-        //                    //playOb.playerObject.isSeeking = true;
-        //                    //serverNet.CallRPC("PlayerIsSeeker", UCNetwork.MessageReceiver.AllClients, -1, playOb.playerObject.networkId);
-        //                    Debug.Log("New Player Seeking");
-        //                }
-        //            }
-        //        }
-        //    }
-        //    int hiders = players.Count;
-        //    foreach (Player p in players)
-        //    {
-        //        if (p.playerObject.isSeeking)
-        //        {
-        //            hiders--;
-        //        }
-        //    }
-        //    if (hiders <= 0)
-        //    {
-        //        gameState = GameState.endgame;
-        //        serverNet.CallRPC("EndGame", UCNetwork.MessageReceiver.AllClients, -1, true);
-        //        Debug.Log("Game Ended");
-        //        ResetGame();
-        //    }
-        //    gameTime -= Time.deltaTime;
-        //    if (gameTime <= 0)
-        //    {
-        //        gameState = GameState.endgame;
-        //        serverNet.CallRPC("EndGame", UCNetwork.MessageReceiver.AllClients, -1, false);
-        //        Debug.Log("Game Ended");
-        //        ResetGame();
-        //    }
-        //}
-        //else if (gameState == GameState.endgame)
-        //{
-        //    gameState = GameState.pregame;
-        //}
+        else if (gameState == GameState.running)
+        {
+            foreach (Player playOb in players)
+            {
+                foreach (Player playOb2 in players)
+                {
+                    if (Vector3.Distance(playOb.playerObject.position, playOb2.playerObject.position) < 1f && playOb != playOb2)
+                    {
+                        Debug.Log("Players are touching");
+                        if (playOb2.playerObject.isSeeking == true)
+                        {
+                            //playOb.playerObject.isSeeking = true;
+                            //serverNet.CallRPC("PlayerIsSeeker", UCNetwork.MessageReceiver.AllClients, -1, playOb.playerObject.networkId);
+                            Debug.Log("New Player Seeking");
+                        }
+                    }
+                }
+            }
+            int hiders = players.Count;
+            foreach (Player p in players)
+            {
+                if (p.playerObject.isSeeking)
+                {
+                    hiders--;
+                }
+            }
+            if (hiders <= 0)
+            {
+                gameState = GameState.endgame;
+                serverNet.CallRPC("EndGame", UCNetwork.MessageReceiver.AllClients, -1, true);
+                Debug.Log("Game Ended");
+                ResetGame();
+            }
+            gameTime -= Time.deltaTime;
+            if (gameTime <= 0)
+            {
+                gameState = GameState.endgame;
+                serverNet.CallRPC("EndGame", UCNetwork.MessageReceiver.AllClients, -1, false);
+                Debug.Log("Game Ended");
+                ResetGame();
+            }
+        }
+        else if (gameState == GameState.endgame)
+        {
+            gameState = GameState.pregame;
+        }
     }
 
     public void ResetGame()
@@ -262,7 +262,7 @@ public class ExampleServer : MonoBehaviour
         Delay(1);
 
         //serverNet.CallRPC("BuildTerrain", UCNetwork.MessageReceiver.AllClients, -1, UnityEngine.Random.Range(int.MinValue, int.MaxValue));
-        gameTime = 45;
+        gameTime = 120;
     }
 
     public void Slap(Vector3 slapPos) //look a few spaces in front of the player and see if anyone is there
