@@ -70,8 +70,8 @@ public class GenerateTree : MonoBehaviour
 
                     treeTemp.position = new Vector3(x / terrainData.heightmapWidth, 0, z / terrainData.heightmapHeight);
                     treeTemp.prototypeIndex = Random.Range(14, 18);
-                    treeTemp.widthScale = 5f;
-                    treeTemp.heightScale = 5f;
+                    treeTemp.widthScale = 1f;
+                    treeTemp.heightScale = 1f;
                     treeTemp.color = Color.white;
                     treeTemp.lightmapColor = Color.white;
                     terrain.AddTreeInstance(treeTemp);
