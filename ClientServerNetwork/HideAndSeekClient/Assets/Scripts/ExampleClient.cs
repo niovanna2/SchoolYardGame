@@ -18,6 +18,8 @@ public class ExampleClient : MonoBehaviour
 
     public GameObject myPlayer;
 
+    public Vector3 DefaultSpawn = new Vector3(5, 20, 5);
+
     // Singleton support
     public static ExampleClient GetInstance()
     {
@@ -141,7 +143,7 @@ public class ExampleClient : MonoBehaviour
         Debug.Log("OnChangeArea called");
 
         // Tell the server we are ready
-        myPlayer = clientNet.Instantiate("Player", new Vector3(5, 20, 5), Quaternion.identity);
+        myPlayer = clientNet.Instantiate("Player", DefaultSpawn, Quaternion.identity);
         myPlayer.GetComponent<NetworkSync>().AddToArea(1);
     }
 

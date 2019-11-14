@@ -1690,6 +1690,7 @@ MonoBehaviour:
   clientNet: {fileID: 0}
   loginScreen: {fileID: 248918549}
   myPlayer: {fileID: 0}
+  DefaultSpawn: {x: 125, y: 20, z: 125}
 --- !u!114 &1385401859
 MonoBehaviour:
   m_ObjectHideFlags: 0
